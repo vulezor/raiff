@@ -1,0 +1,77 @@
+<style>
+
+</style>
+<div class="page_wrapper" data-ng-class="{'blur': show_dispozicija===true}">
+
+    <article class="page_header cf" >
+       <div class="pull-left">
+           <h1 class="page-title">
+            <i class="fa fa-street-view fa-lg"></i></i>
+            Kupac/Pregled repromaterijala  </h1>
+       </div>
+        <div class="pull-right smart-form" style="position:relative;z-index:100">
+            <section class="col col-lg-12 padding_15" >
+                <label class="input" style="margin:0px;z-index:1001">
+                    <i class="icon-prepend for_infobox  fa fa-street-view" data-boxinfo="Datum do"></i>
+                    <input type="text" class="input-sm" name="Odabrani kupac" readonly placeholder="Izaberi kupca"  data-ng-model="odabrani_firm_name" data-ng-click="hide()">
+                </label>
+                <i class="fa fa-cog fa-spin for_kupca"></i>
+            </section>
+            <div class="col col-lg-9 search_kupac_con" data-ng-show="hideKupac" >
+                <div class="row" >
+                    <section class="col col-lg-12" style="margin:15px 0px">
+                        <label class="input">
+                            <i class="icon-prepend fa fa-search for_infobox" data-boxinfo="Datum do"></i>
+                            <input type="text" class="input-sm" name="filter_kupca" placeholder="filtriraj kupca"  data-ng-model="trazi_kupca">
+                        </label>
+                    </section>
+                    <div class="kupac_list" >
+                    <ul>
+                        <li data-ng-repeat="(key, kupac) in kupci | filter:trazi_kupca" data-ng-click="odabirKupca(kupac)">
+                            {{kupac.firm_name}}
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </article>
+    <article style="position:relative;z-index:3">
+        <ul class="category_menu cf">
+            <li data-ng-hide="odabrani_firm_name==''" data-ng-click="showGoods()"><span>{{odabrani_firm_name}}:</span> </li>
+            <li data-ng-repeat="items in category_menu_items"  >
+                <span data-ng-click="showGoods($index)">&nbsp;{{ items.goods_type | capitalize }}  /&nbsp;</span>
+                <ul class="good_menu cf">
+                    <li data-ng-repeat="good in items.good_names" data-ng-click="showGoods($parent.$index, good.goods_id)" >{{ good.goods_name }}  </li>
+                </ul>
+
+            </li>
+
+        </ul>
+    </article>
+
+    <article data-ng-repeat="good_type in client_results">
+        <div class="col-mg-12 form-header font-md font-white ">
+            <i class="fa fa-table"></i><span> {{ good_type.goods_type | capitalize}}</span>
+        </div>
+        <div class="client-goods">
+            <div class="row tab_header1">
+                <div class="col col-lg-1">Br.Otp.</div>
+                <div class="col col-lg-1">Datum</div>
+                <div class="col col-lg-2">Magacin</div>
+                <div class="col col-lg-4">Naziv robe</div>
+                <div class="col col-lg-2">Vozač</div>
+                <div class="col col-lg-2">Količina</div>
+            </div>
+            <div class="row client_result"  data-ng-repeat="good in good_type.good_names">
+                <div class="col col-lg-1"><label class="label label-primary">{{ good.document_number }}</label></div>
+                <div class="col col-lg-1">{{good.datum_otpreme}}</div>
+                <div class="col col-lg-2">{{good.magacin}}</div>
+                <div class="col col-lg-4">{{good.goods_name}}</div>
+                <div class="col col-lg-2">{{good.driver_name+', '+good.vehicle_registration}}</div>
+                <div class="col col-lg-2 text-right">{{good.kolicina+' '+good.merna_jedinica}}</div>
+            </div>
+        </div>
+    </article>
+</div>

@@ -1,0 +1,697 @@
+<style type="text/css">
+    .black-background{
+        background-color:rgba(0,0,0,0.6);
+        position:absolute;
+        height:100%;
+        width:100%;
+        z-index:1000;
+    }
+    .prijem_merkantila_container{
+        width:1140px;
+        background-color:#fff;
+        margin:0px auto;
+        position:relative;
+        top:50%;
+        margin-top:-273px;
+    }
+    .pm_body{
+        padding:10px;
+    }
+    .model_con .row div input{
+        max-width:100%;
+        min-width:30%;
+        padding:3px;
+        font-size:12px;
+    }
+    .client_panel_body .row{
+        -webkit-transition: all 0.20s ease-in-out;
+        -moz-transition: all 0.20s ease-in-out;
+        -o-transition: all 0.20s ease-in-out;
+        transition: all 0.20s ease-in-out;
+        font-size:12px;
+    }
+    .client_panel_body .row:nth-child(even) {background: #eee}
+    .client_panel_body .row:nth-child(odd) {background: #FFF}
+    .client_panel_body .row:hover{
+        background: #ccc;
+    }
+    .client_panel_body .row, .model_con .row{
+        margin-bottom: 0px;
+        margin-left:-1px;
+        margin-right:-1px;
+    }
+    .client_panel_body .row div{
+        line-height:28px;
+    }
+    .box-shadowing{
+        -webkit-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+    }
+    .row.clients div{
+        float:left;
+        padding-left:10px;
+        display:block;
+    }
+    .row.clients div input[type="text"]{
+        font-size:12px;
+        margin:3px 0px 3px 0px;
+    }
+
+    .row.clients div:nth-child(1){
+        width:5%;
+    }
+    .row.clients div:nth-child(2){
+        width:20%;
+    }
+    .row.clients div:nth-child(3){
+        width:20%;
+    }
+    .row.clients div:nth-child(4){
+        width:20%;
+    }
+    .row.clients div:nth-child(5){
+        width:15%;
+    }
+    .row.clients div:nth-child(6){
+        width:15%;
+    }
+    .row.clients div:nth-child(7){
+        width:5%;
+    }
+</style>
+<!-- STORNIRANJE CONTAINER-->
+<div class="black-background" ng-show="show_storniranje" style="z-index:5000;">
+    <div class="storni_container">
+        <div class="form-header font-md font-white storni_panel_header" >
+            <i class="fa fa-exclamation-triangle " ></i> Storniranje otpremnice br: {{ storna_otpremnica.document_br }}
+            <span data-ng-click="show_storniranje = !show_storniranje"><i class="fa fa-times"></i></span>
+        </div>
+        <div style="padding:10px;background-color:#fff;font-size:12px">
+
+            <form class="smart-admin" name="forma_storniranja" ng-submit="stornirajOtpremnicu()" novalidate>
+                <label>Razlog storniranja:</label>
+
+                <textarea class="form-control" style="width:100%;display:block;" rows="6" name="napomena" id="napomena" ng-model="napomena"></textarea>
+
+                <div class="note"  style="margin-bottom:10px" >
+                    <strong><i class="fa fa-info-circle "></i> Napomena:</strong> Ukoliko stornirate, informacija će vam biti dostupna u opciji storni dokumenti.
+                </div>
+                <div class="cf">
+                    <button type="submit" class="btn btn-primary btn-xs pull-left" >Potvrdi</button>
+                    <i class="fa fa-cog fa-2x fa-spin pull-left ajax_storno" style="margin-left:5px"></i>
+                </div>
+            </form>
+        </div>
+    </div>
+</div><!-- STORNIRANJE CONTAINER-->
+
+
+
+<div class="black-background" ng-show="show_otprema_merkantila" data-ng-controller="otpremaMerkantilaController">
+
+
+<!--Client Wrapper-->
+<div ng-show="show_clients" class=" box-shadowing client-wrapper " >
+    <div class="form-header font-md font-white client_panel_header" >
+        <i class="fa fa-user-plus " ></i> Dobavljači/Kupci
+        <span data-ng-click="showClientPanel()"><i class="fa fa-times"></i></span>
+    </div>
+    <div class="cf" style="background:#eee;border-bottom:1px solid #999">
+        <div class="model_con">
+            <div class="row clients">
+                <div><input type="text" data-ng-model="search.client_cypher" placeholder="Šifra klijenta" /></div>
+                <div><input type="text" data-ng-model="search.firm_name" placeholder="Naziv firme" /></div>
+                <div><input type="text" data-ng-model="search.client_address" placeholder="Adresa" /></div>
+                <div><input type="text" data-ng-model="search.place" placeholder="Mesto" /></div>
+                <div><input type="text" data-ng-model="search.client_name" placeholder="Odgovorno Lice" /></div>
+                <div><input type="text" data-ng-model="search.client_jmbg" placeholder="JMBG" /></div>
+                <div></div>
+            </div>
+        </div>
+        <div style="float:right;width:17px;">
+        </div>
+    </div>
+    <div class="client_panel_body">
+        <div>
+            <div class="row clients cf" data-ng-repeat="client in clients  | filter:{client_cypher: search.client_cypher, firm_name: search.firm_name, client_address: search.client_address, place: search.place, client_name: search.client_name, client_jmbg: search.client_jmbg}">
+                <div>{{client.client_cypher}}</div>
+                <div>{{client.firm_name}}</div>
+                <div>{{client.client_address ==='' ? "&nbsp;" : client.client_address}}</div>
+                <div>{{client.place}}</div>
+                <div>{{client.client_name===' ' ? "&nbsp;" : client.client_name}}</div>
+                <div>{{client.client_jmbg===0 ? "&nbsp;" : client.client_jmbg}}</div>
+                <div class="col col-sm-1"><span ng-click="setClient(client.client_id)" class=" btn btn-sm label label-primary">Ok</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Client Wrapper-->
+
+<!--otprema merkantila kontejner -->
+<div class="otprema_merkantila_container">
+    <div class="form-header font-md font-white right-side otprema_merkantila_container_header" >
+        <i class="fa fa-download" ></i>  <b>Otprema robe:</b> Merkantila
+        <span ng-click="showOtpremaMerkantilaContainer()"><i class="fa fa-times" ></i></span>
+    </div>
+    <div class="pm_body">
+        <article>
+            <div class="row" style="width:1150px;">
+                <div class="col col-sm-6">
+                    <div style="max-width: 100%">
+                        <div class="col-mg-12 form-header font-sm font-white">
+                            <span class="font-sm">Otprema merkantile</span>
+                        </div>
+                        <form id="merkantila_form" class="form-horizontal" method="post" name="client_form"  ng-submit="firstMeasurement()" novalidate>
+                            <div class="form-frame background-white smart-form cf">
+                                <div style="height:314px">
+
+                                    <div class="row">
+                                        <smart-select section-class="col col-sm-6 fixsection" label-class="select" select-class="input-sm"  placehold="Izaberi magacin" name="wearehouse_id" model="insert_data.wearehouse_id" options="w.wearehouse_id as w.wearehouse_name | capitalize for w in wearehouses" icon="for_infobox" ></smart-select>
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input" input-class="input-sm" icon="icon-prepend fa fa-calendar for_infobox" placehold="Datum"   name="datum" model="insert_data.datum" maxl="6" readonly="readonly" ></smart-input>
+                                    </div>
+                                    <div class="row">
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input" input-class="input-sm text-right" icon="icon-prepend fa fa-balance-scale for_infobox" placehold="Bruto"    name="bruto" model="insert_data.bruto" maxl="10" directive="custom-validation"></smart-input>
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input" input-class="input-sm text-right" icon="icon-prepend fa fa-balance-scale for_infobox" placehold="Tara"    name="tara" model="insert_data.tara" maxl="10" directive="custom-validation"></smart-input>
+                                    </div>
+
+                                    <div class="row">
+                                        <smart-select section-class="col col-sm-6 fixsection" label-class="select" select-class="input-sm"  placehold="Izaberi tip merkantile" name="insert_type_of_goods_id" model="insert_data.type_of_goods_id" options="m.type_of_goods_id as m.goods_type | capitalize for m in goods_type | orderBy:'m.label'" icon="for_infobox" action="data-ng-change='selectGoodsName()'"></smart-select>
+                                        <smart-select section-class="col col-sm-6 fixsection" label-class="select" select-class="input-sm"  placehold="Izaberi naziv merkantilne robe" name="goods_id1" model="insert_data.goods_id" options="g.goods_id as g.goods_name for g in goods_name | orderBy:'g.goods_name'" icon="for_infobox"></smart-select>
+                                    </div>
+
+                                    <div class="row">
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user-plus for_infobox" placehold="Odabir kupca" readonly="readonly" name="firm_name" model="insert_data.firm_name" directive="custom-validation"></smart-input>
+                                        <section class="col col-sm-6 fixsection">
+                                            <button type="button" class="col col-sm-12 btn btn-success btn-sm pull-right get_client" data-ng-click="getClient()" style="margin-top:0px"><i class="fa fa-user-plus"></i> Dodaj kupca</button>
+                                        </section>
+                                    </div>
+
+                                    <div class="row">
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa fa-truck for_infobox" placehold="Ime vozača"  name="driver_name" model="insert_data.driver_name" directive="custom-validation"></smart-input>
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-truck for_infobox" placehold="Registarski broj vozila"  name="driver_reg" model="insert_data.driver_reg" directive="custom-validation"></smart-input>
+                                    </div>
+
+                                    <div class="row" data-ng-show='culture.vlaga'>
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input" input-class="input-sm text-right" icon="icon-prepend fa fa-flask for_infobox"  maxl="5" placehold="Vlaga"  name="vlaga" model="insert_data.vlaga" directive="is-number"></smart-input>
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input"  input-class="input-sm text-right" icon="icon-prepend fa fa-flask for_infobox"  maxl="5" placehold="Primese"  name="primese" model="insert_data.primese" directive="is-number"></smart-input>
+                                    </div>
+
+
+                                    <div class="row cf" data-ng-show='culture.hektolitar'>
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input"  input-class="input-sm text-right" icon="icon-prepend fa fa-flask for_infobox" maxl="5" placehold="Hektolitar"  name="hektolitar" model="insert_data.hektolitar" directive="is-number"></smart-input>
+                                        <smart-input section-class="col col-sm-3 fixsection" label-class="input"  input-class="input-sm text-right" icon="icon-prepend fa fa-flask for_infobox" maxl="5" placehold="Protein"  name="protein" model="insert_data.protein" directive="is-number"></smart-input>
+                                        <smart-input section-class="col col-sm-3 fixsection" label-class="input"  input-class="input-sm text-right" icon="icon-prepend fa fa-flask for_infobox" maxl="5" placehold="Gluten"  name="gluten" model="insert_data.gluten" directive="is-number"></smart-input>
+                                    </div>
+
+                                    <div class="row cf" data-ng-show='culture.hektolitar'>
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input"  input-class="input-sm text-right" icon="icon-prepend fa fa-flask for_infobox" maxl="5" placehold="Energija"  name="energija" model="insert_data.energija" directive="is-number"></smart-input>
+                                        <smart-input section-class="col col-sm-6 fixsection" label-class="input"  input-class="input-sm text-right" icon="icon-prepend fa fa-flask for_infobox" maxl="5" placehold="Br padanja"  name="br_padanja" model="insert_data.br_padanja" directive="is-number"></smart-input>
+                                    </div>
+
+                                    <div class="row" data-ng-show="culture.lom">
+                                        <smart-input section-class="col col-sm-6 fixsection"  label-class="input"  input-class="input-sm text-right" icon="icon-prepend fa fa-flask for_infobox"  maxl="5" placehold="Lom"  name="lom" model="insert_data.lom" directive="is-number" ></smart-input>
+                                        <smart-input section-class="col col-sm-6 fixsection"  label-class="input"  input-class="input-sm text-right" icon="icon-prepend fa fa-flask for_infobox"  maxl="5" placehold="Defekt"  name="defekt" -model="insert_data.defekt" directive="is-number" ></smart-input>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <hr/>
+                                    <section class="col col-sm-6 fixsection cf">
+                                        <label class="input">
+                                            <button type="submit" class="btn btn-sm btn-primary pull-left" style="margin-top:10px" id="unos_korisnika" >Potvrdi</button>
+                                        </label>
+                                        <i class="fa fa-cog fa-2x fa-spin pull-left ajax_load_visibility" style="margin-top:10px;margin-left:5px"></i>
+                                    </section>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+
+
+
+                <div class="col col-sm-6 prijemnica" style="position:relative;">
+                    <div style="background:#fff;">
+                        <div class="form-header font-sm font-white">
+                            <i class="fa fa-file-text-o  fa-lg font-sm" ></i><span class="font-sm"> Otpremnica Br: {{ last_measurement.document_br}}</span>
+                            <div class="pull-right header-item cf">
+                                <span class="pull-right" ng-click="print()"><i class="fa fa-print" ></i></span>
+                                <span class="pull-right otpremaSearch" ng-click="gimePrijemPanel()"><i class="fa fa-cog" ></i></span>
+                                <!--<span class="pull-right" ng-click="closePrijemPanel()"><i class="fa fa-user" ></i></span>-->
+                            </div>
+
+                        </div>
+                        <div class="form-frame background-white smart-form cf prijemnica_pregled" style="min-height:389px;font-size:12px;overflow:hidden" >
+
+                            <!-- Prijem panel pretraga-->
+                            <div class="searchPanelPrijem">
+                                <div class="form-header font-md font-white searchPanelHead" style="border-radius:4px 4px 0px 0px;">
+                                    <i class="fa fa-search fa-lg" ></i><span> Pretraga otpremnica</span>
+                                </div>
+                                <div style="padding:10px;">
+                                    <div class="row">
+                                        <smart-input section-class="col col-sm-12 fixsection" label-class="input" icon="icon-prepend fa fa-calendar for_infobox" placehold="Odabir datuma prijema" readonly="readonly" name="datumPrijema" model="otpremaSearch.datumPrijema" input-action="ng-change='getSearchType()'"></smart-input>
+                                    </div>
+                                    <div class="row">
+                                        <smart-select section-class="col col-sm-12 fixsection" label-class="select" select-class="input-sm"  placehold="Izaberi tip merkantile" name="otpremaSearch.input_type" model="otpremaSearch.input_type_id" options="ty.type_of_goods_id as ty.goods_type | capitalize for ty in otpremaSearch.input_type" icon="for_infobox" action="ng-change='getSearchMerkantilaName()'"></smart-select>
+                                    </div>
+                                    <div class="row">
+                                        <smart-select section-class="col col-sm-12 fixsection" label-class="select" select-class="input-sm"  placehold="Izaberi naziv merkantilne robe" name="goods_id" model="otpremaSearch.goods_id" options="go.goods_id as go.goods_name for go in otpremaSearch.goods_names | orderBy:'go.otpremaSearch.goods_name'" icon="for_infobox"  action="ng-change='getSearchOtpremnica()'"></smart-select>
+                                    </div>
+                                    <div class="row">
+                                        <smart-select section-class="col col-sm-12 fixsection" label-class="select" select-class="input-sm"  placehold="Odaberi prijemnicu" name="input_id" model="otpremaSearch.input_id" options="prijem.input_id as prijem.document_br +' | '+ prijem.goods_name +' | '+  prijem.firm_name  for prijem in otpremaSearch.inputs | orderBy:'prijem.input_id'" icon="for_infobox" action="ng-change='selectOdabranuOtpremu()'"></smart-select>
+                                    </div>
+                                </div>
+                            </div><!-- /Prijem panel pretraga-->
+
+                            <!-- ifZitarice -->
+                            <div data-ng-show="showInput">
+                                <div class="col col-sm-2 text-right"><b>Dokument:</b></div>
+                                <div class="col col-sm-4 text-right">{{ last_measurement.document_br }} <i class="fa fa-file-text-o fa-fw"></i></div>
+                                <div class="col col-sm-1 text-right"><b>Datum:</b></div><div class="col col-sm-5 text-right"><i class="fa fa-calendar fa-fw"></i> {{ last_measurement.date+' - '+ last_measurement.time}} <i class="fa fa-clock-o  fa-fw"></i></div>
+
+                                <div class="col col-sm-12"><hr></div>
+
+                                <div class="col col-sm-2"><b>Roba:</b></div><div class="col col-sm-4">{{last_measurement.goods_name}}</div>
+                                <div class="col col-sm-2"><b>Kupac:</b></div><div class="col col-sm-4">{{last_measurement.firm_name}}</div>
+                                <div class="col col-sm-2"><b>Vozac:</b></div><div class="col col-sm-4">{{last_measurement.driver_name | capitalize}} <i class="fa fa fa-truck fa-fw pull-right"></i></div>
+                                <div class="col col-sm-2"><b>Adresa:</b></div><div class="col col-sm-4">{{ last_measurement.client_address }}</div>
+                                <div class="col col-sm-2"><b>Registracija:</b></div><div class="col col-sm-4">{{last_measurement.vehicle_registration | uppercase}} <i class="fa fa fa-truck fa-fw pull-right"></i></div>
+                                <div class="col col-sm-2"><b>Mesto:</b></div><div class="col col-sm-4">{{ last_measurement.place_name +', '+ last_measurement.post_number }}</div>
+
+                                <div class="col col-sm-12"><hr></div>
+
+                                <div class="col col-sm-2"><b>Bruto:</b></div>
+                                <div class="col col-sm-4 text-right">{{last_measurement.bruto}} kg <i class="fa fa-balance-scale fa-fw"></i></div>
+
+                                <div class="col col-sm-2" data-ng-show="ifSacma"><b>Vlaga:</b></div>
+                                <div class="col col-sm-4 text-right" data-ng-show="ifSacma">{{last_measurement.vlaga}} % <i class="fa fa fa-flask fa-fw"></i></div>
+
+                                <div class="col col-sm-2" ><b>Tara:</b></div>
+                                <div class="col col-sm-4 text-right">{{last_measurement.tara}} kg <i class="fa fa-balance-scale fa-fw"></i></div>
+
+                                <div class="col col-sm-2" data-ng-show="ifSacma"><b>Primese:</b></div>
+                                <div class="col col-sm-4 text-right" data-ng-show="ifSacma">{{ last_measurement.primese }} % <i class="fa fa fa-flask fa-fw"></i></div>
+
+                                <div  data-ng-show="ifKukuruz" class="col col-sm-2"><b>Kalo:</b></div>
+                                <div  data-ng-show="ifKukuruz" class="col col-sm-4 text-right">{{last_measurement.kalo_rastur}} kg <i class="fa fa-balance-scale fa-fw"></i></div>
+
+
+
+
+                                <div class="col col-sm-2" data-ng-show="ifKukuruz" ><b>Lom:</b></div>
+                                <div data-ng-show="ifKukuruz"  class="col col-sm-4 text-right">{{ last_measurement.lom }} % <i class="fa fa fa-flask fa-fw"></i></div>
+
+                                <div class="col col-sm-2"><b>Neto:</b></div>
+                                <div class="col col-sm-4 text-right">{{last_measurement.neto}} kg <i class="fa fa-balance-scale fa-fw"></i></div>
+
+                                <div class="col col-sm-2"  data-ng-show="ifZitarice"><b>Hektolitar:</b></div>
+                                <div class="col col-sm-4 text-right" data-ng-show="ifZitarice">{{ last_measurement.hektolitar }} % <i class="fa fa fa-flask fa-fw"></i></div>
+
+                                <div class="col col-sm-2"  data-ng-show="ifZitarice"><b>Protein:</b></div>
+                                <div class="col col-sm-4 text-right" data-ng-show="ifZitarice">{{ last_measurement.protein }} % <i class="fa fa fa-flask fa-fw"></i></div>
+
+                                <div class="col col-sm-2"  data-ng-show="ifZitarice"><b>Energija:</b></div>
+                                <div class="col col-sm-4 text-right" data-ng-show="ifZitarice">{{ last_measurement.energija }} % <i class="fa fa fa-flask fa-fw"></i></div>
+                                <div class="col col-sm-2"  data-ng-show="ifZitarice"><b>Gluten:</b></div>
+                                <div class="col col-sm-4 text-right" data-ng-show="ifZitarice">{{ last_measurement.gluten }} % <i class="fa fa fa-flask fa-fw"></i></div>
+                                <div class="col col-sm-3"  data-ng-show="ifZitarice"><b>Br padanja:</b></div>
+                                <div class="col col-sm-3 text-right" data-ng-show="ifZitarice">{{ last_measurement.br_padanja }} <i class="fa fa fa-flask fa-fw"></i></div>
+
+                                <div class="col col-sm-2" data-ng-show="ifKukuruz" ><b>Defekt:</b></div>
+                                <div data-ng-show="ifKukuruz"  class="col col-sm-4 text-right">{{ last_measurement.defekt }} % <i class="fa fa fa-flask fa-fw"></i></div>
+
+                                <div class="col col-sm-12"><hr></div>
+
+                                <div class="col col-sm-6 text-right"><b>Obracunska kolicina:</b></div>
+                                <div class="col col-sm-3 text-right">{{ last_measurement.neto }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+
+                                <div class="col col-sm-6 text-right" data-ng-show="ifKukuruz" ><b>Sirov Rastur (kalo):</b></div>
+                                <div data-ng-show="ifKukuruz"  class="col col-sm-3 text-right">{{ last_measurement.kalo_rastur }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+
+                                <div class="col col-sm-6 text-right" data-ng-show="ifSacma"><b>Odbitak ili dodatak na vlagu:</b></div>
+                                <div class="col col-sm-3 text-right" data-ng-show="ifSacma">{{ last_measurement.dnv }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+
+                                <div class="col col-sm-6 text-right" data-ng-show="ifSacma"><b>Odbitak ili dodatak na primese:</b></div>
+                                <div class="col col-sm-3 text-right" data-ng-show="ifSacma">{{ last_measurement.dnp }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+
+                                <div class="col col-sm-6 text-right" data-ng-show="ifZitarice" ><b>Odbitak ili dodatak na htl:</b></div>
+                                <div data-ng-show="ifZitarice"  class="col col-sm-3 text-right" >{{ last_measurement.dnh }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+
+                                <div class="col col-sm-6 text-right" data-ng-show="ifKukuruz" ><b>Odbitak ili dodatak na lom:</b></div>
+                                <div data-ng-show="ifKukuruz"  class="col col-sm-3 text-right">{{ last_measurement.dnl }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+
+                                <div class="col col-sm-6 text-right" data-ng-show="ifKukuruz" ><b>Odbitak ili dodatak na defekt:</b></div>
+                                <div class="col col-sm-3 text-right" data-ng-show="ifKukuruz" >{{ last_measurement.dnd }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+
+                                <div class="col col-sm-6 text-right" data-ng-show="ifSacma"><b>SRPS:</b></div>
+                                <div class="col col-sm-3 text-right" data-ng-show="ifSacma">{{ last_measurement.srps }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+
+                                <div class="col col-sm-12" data-ng-show="ifKukuruz || ifZitarice" ><hr></div>
+
+                                <div class="col col-sm-6 text-right" data-ng-show="ifKukuruz || ifZitarice" ><b>Troškovi sušenja:</b></div>
+                                <div data-ng-show="ifKukuruz"  class="col col-sm-3 text-right">{{ last_measurement.trosak_susenja }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+
+                                <div class="col col-sm-6 text-right" data-ng-show="ifKukuruz || ifZitarice" ><b>Suvo zrno na raspolaganju:</b></div>
+                                <div data-ng-show="ifKukuruz"  class="col col-sm-3 text-right">{{ last_measurement.suvo_zrno }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</div><!-- /prijem merkantila kontejner -->
+</div>
+
+
+
+
+<div class="page_wrapper" data-ng-class="{'blur': show_otprema_merkantila===true || show_storniranje===true}">
+    <article class="page_header cf">
+        <h1 class="page-title">
+            <i class="fa fa-eye fa-lg"><i class="fa fa-upload fa-lg"></i></i>
+            Pregled otpremljene robe <span>(Merkantila)</span></h1>
+    </article>
+
+
+
+
+    <article>
+        <div class="row">
+            <div class="col-md-5" >
+                <div style="max-width: 100%">
+                    <div class="col-mg-12 form-header font-md font-white ">
+                        <i class="fa fa-database"></i><span> Pretraga otpremljene merkantilne </span>
+                        <div class="pull-right white-btn" ng-click="showOtpremaMerkantilaContainer()">Otprema Merkantile</div>
+                    </div>
+                    <div class="form-frame background-white smart-form">
+                        <form id="wearhouse_form"  method="post" name="wearhouse_form"  ng-submit="getSearchData()" novalidate>
+                            <div class="row">
+                                <smart-select section-class="col col-sm-6 fixsection" label-class="select" select-class="input-sm"  placehold="Izaberi tip merkantile" name="type_of_goods_id" model="search_data.type_of_goods_id" options="gt.type_of_goods_id as gt.goods_type | capitalize for gt in get_search_good_type" icon="for_infobox" action='data-ng-change="getSearchGoodName()"' ></smart-select>
+                                <smart-select section-class="col col-sm-6 fixsection" label-class="select" select-class="input-sm"  placehold="Izaberi naziv merkantile" name="goods_id" model="search_data.goods_id" options="gn.goods_id as gn.goods_name | capitalize for gn in get_search_good_name" icon="for_infobox" action="data-ng-change='getGoodWearehouses()'" ></smart-select>
+                            </div>
+                            <div class="row">
+                                <smart-select section-class="col col-sm-6 fixsection" label-class="select" select-class="input-sm"  placehold="Izaberi magacin" name="wearehouse_id" model="search_data.wearehouse_id" options="gw.wearehouse_id as gw.wearehouse_name | capitalize for gw in get_search_good_wearehouses" icon="for_infobox" action="data-ng-change='getGoodClient()'"></smart-select>
+                                <smart-select section-class="col col-sm-6 fixsection" label-class="select" select-class="input-sm"  placehold="Izaberi kupca" name="client_id" model="search_data.client_id" options="gt.client_id as gt.firm_name | capitalize for gt in get_search_good_client" icon="for_infobox"></smart-select>
+                                </div>
+                            <div class="row">
+                                <smart-input section-class="col col-sm-6 fixsection" label-class="input" input-class="input-sm" icon="icon-prepend fa fa-calendar for_infobox" placehold="Datum od"   name="datum_od" model="search_data.date_od" maxl="6" readonly="readonly" ></smart-input>
+                                <smart-input section-class="col col-sm-6 fixsection" label-class="input" input-class="input-sm" icon="icon-prepend fa fa-calendar for_infobox" placehold="Datum do"  name="datum_do" model="search_data.datum_do" maxl="6" readonly="readonly"></smart-input>
+
+                            </div>
+                            <div class="row">
+                                 <section class="col col-sm-6 col-md-offset-6 fixsection ">
+                                    <label class="input">
+                                        <button type="submit" class="btn btn-sm btn-primary pull-right" style="margin-top:0px"   >Potvrdi</button>
+                                    </label>
+                                    <i class="fa fa-cog fa-2x fa-spin pull-right ajax_load_visibility" style="margin-top:10px"></i>
+                                </section>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7" style="position:relative;height:241px;">
+                <div style="position:absolute; width:98%; bottom:0%;left:0%">
+                    <div class="col-mg-12 form-header font-md font-white">
+                        <i class="fa fa-pie-chart"></i><span> Ukupan rezultat po pretrazi sa ponder vrednostima</span>
+                    </div>
+                    <div style=" background-color:#fff">
+                        <div style="font-size:12px">
+                            <table class="cf" width="100%">
+                                <thead class="zaglavlje_totala">
+                                <tr>
+                                    <th>Neto total:</th>
+                                    <th>Ponder vlage:</td>
+                                    <th>Ponder primesa:</th>
+                                    <th data-ng-show="ifZitarice">Ponder hektolitra:</th>
+                                    <th data-ng-show="ifKukuruz">Ponder loma:</th>
+                                    <th data-ng-show="ifKukuruz">Ponder defekta:</th>
+                                    <th>SRPS total:</th>
+                                    <th data-ng-show="ifKukuruz || ifZitarice">Trošak sušenja total:</th>
+                                    <th data-ng-show="ifKukuruz || ifZitarice">Suvo zrno total:</th>
+                                </tr>
+                                </thead>
+                                <tbody class="body_totala">
+                                <tr>
+                                    <td>{{total_result.neto_total}}</td>
+                                    <td>{{total_result.ponder_vlage}}</td>
+                                    <td>{{total_result.ponder_primesa}}</td>
+                                    <td data-ng-show="ifZitarice">{{total_result.ponder_hektolitra}}</td>
+                                    <td data-ng-show="ifKukuruz">{{total_result.ponder_loma}}</td>
+                                    <td data-ng-show="ifKukuruz">{{total_result.ponder_defekta}}</td>
+                                    <td>{{total_result.srps_total}}</td>
+                                    <td data-ng-show="ifKukuruz || ifZitarice">{{total_result.trosak_susenja_total}}</td>
+                                    <td data-ng-show="ifKukuruz || ifZitarice">{{total_result.suvo_zrno_total}}</td>
+                                </tr>
+                                <tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <!-- USER TABLE -->
+    <article>
+        <div class="col-mg-12 form-header font-md font-white">
+            <i class="fa fa-table"></i><span> Tabelarni pregled filtriranih rezultata</span>
+            <div class="pull-right" data-ng-click="getExcell()">
+                <div class="dropzone_2">
+                    <i class="fa  fa-download fa-fw" ></i> Download <i class="fa fa-file-excel-o fa-fw"></i>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="pregledOtpremaTable as otpremaShowCase" style="position:relative">
+            <table datatable="" dt-options="otpremaShowCase.dtOptions" dt-columns="otpremaShowCase.dtColumns" dt-instance="otpremaShowCase.dtInstance"   class="table table-striped table-bordered tables_font table_prijemmerkantila" cellspacing="0" cellpadding="0"  width="100%" style="width:0px;font-family:arial">
+                <!--<p>
+                    <button type="button" data-ng-click="showCase.stateChange()">Hello</button>
+                </p>-->
+            </table>
+        </div>
+    </article>
+</div>
+
+
+
+
+
+<!--PRINT PRIRPEMA-->
+
+<div class="print_prijem" style="position:absolute;top:0%;left:0%;z-index:10;display:none">
+<div class="print logo_area ">
+    <img src="public/img/raiffeisen_redovan2.png" width="300" style="padding-bottom:20px">
+    <div class="cf">
+        <div class="one-half push-left"><b>Dokument br:</b> <i class="fa fa-file-text-o fa-fw"></i> {{ last_measurement.document_br }}</div>
+        <div class="one-half push-right text-right"><b>Datum i vreme:</b>
+            <i class="fa fa-calendar fa-fw"></i> {{ last_measurement.date+' - '+ last_measurement.time}} <i class="fa fa-clock-o  fa-fw"></i>
+        </div>
+    </div>
+    <div class="cf">
+        <div class="one-half push-left"><b>Magacin:</b> <i class="fa fa-database fa-fw"></i> {{ last_measurement.wearehouse_name }}</div>
+        <div class="one-half push-right text-right"><b>Magacioner:</b> <i class="fa fa-user fa-fw"></i> {{ last_measurement.storekeeper }}</div>
+    </div>
+</div>
+
+<hr/>
+
+<div class="text-center"><h3>Otpremnica br: <i class="fa fa-file-text-o fa-fw"></i> {{ last_measurement.document_br }}</h3></div>
+<div class="cf">
+    <div class="one-half push-left"><h4><b><u>Kupac robe</u></b></h4></div>
+    <div class="one-half push-right text-right"><h4><b><u>Dobavljač / Prodavac robe</u></b></h4></div>
+</div>
+
+<div class="cf">
+    <div class="one-half push-left">
+        <div class="cf">
+            <div><b>Kupac:</b> {{  last_measurement.client_cypher+', '+last_measurement.firm_name }}</div>
+            <div><b>Mesto:</b> {{ last_measurement.post_number+' '+last_measurement.place_name }}</div>
+            <div><b>Adresa:</b> {{ last_measurement.client_address }}</div>
+            <div ng-show="last_measurement.client_brlk != 0"><b>Br.Licne karte:</b> {{ last_measurement.client_brlk +', '+ last_measurement.client_sup }}</div>
+            <div ng-show="last_measurement.client_jmbg != 0"><b>JMBG:</b> {{ last_measurement.client_jmbg}}</div>
+            <div ng-show="last_measurement.br_agricultural != ''"><b>BPG:</b> {{ last_measurement.br_agricultural }}</div>
+            <div ng-show="last_measurement.pib != 0"><b>PIB:</b> {{ last_measurement.pib }}</div>
+        </div>
+    </div>
+    <div class="one-half push-right">
+        <div class="cf">
+            <div class="text-right"><b>Prodavac:</b> Raiffiesen Agro D.o.o</div>
+            <div class="text-right"><b>Mesto:</b> 10070 Novi Beograd</div>
+            <div class="text-right"><b>Adresa:</b> Bulevar Zorana Đinđića 67/17,</div>
+            <div class="text-right"><b>PIB:</b> 105528683</div>
+        </div>
+    </div>
+</div>
+
+
+<hr/>
+<div><h4><b><u>Podaci o predatoj robi i vozacu</u></b></h4></div>
+<div class="cf">
+    <div class="one-half push-left">
+        <div class="cf">
+            <div><b>Vrsta robe:</b> {{ last_measurement.goods_type | capitalize }}</div>
+            <div><b>Šifra i naziv robe :</b> {{ last_measurement.goods_cypher +', '+ last_measurement.goods_name}}</div>
+        </div>
+    </div>
+    <div class="one-half push-right">
+        <div class="cf">
+            <div class="text-right"><b>Vozac:</b> {{ last_measurement.driver_name}}</div>
+            <div class="text-right"><b>Registarske table :</b> {{ last_measurement.vehicle_registration | uppercase }}</div>
+        </div>
+    </div>
+</div>
+
+
+<hr/>
+<div><h4><b><u>Vaga i Laboratorija</u></b></h4></div>
+<div class="cf">
+    <div class="one-half push-left">
+        <div class="cf">
+            <div class="one-half push-left"><b>Bruto:</b></div>
+            <div class="one-half push-right text-right right-padding">{{ last_measurement.bruto}} kg <i class="fa fa-balance-scale fa-fw"></i></div>
+        </div>
+        <div class="cf">
+            <div class="one-half push-left"><b>Tara:</b></div>
+            <div class="one-half push-right text-right right-padding">{{ last_measurement.tara}} kg <i class="fa fa-balance-scale fa-fw"></i></div>
+        </div>
+        <div class="cf" data-ng-show="ifKukuruz">
+            <div class="one-half push-left"><b>Kalo:</b></div>
+            <div class="one-half push-right text-right right-padding">{{ last_measurement.kalo_rastur}} kg <i class="fa fa-balance-scale fa-fw"></i></div>
+        </div>
+        <div class="cf" >
+            <div class="one-half push-left " style="font-size:16px;font-weight:bolder"><b>Neto:</b></div>
+            <div class="one-half push-right text-right right-padding"><span style="font-size:16px;font-weight:bolder">{{ last_measurement.neto}} kg</span> <i class="fa fa-balance-scale fa-fw"></i></div>
+        </div>
+        <div class="cf" data-ng-show="ifZitarice">
+            <div class="one-half push-left " style="font-size:16px;font-weight:bolder"><b>Protein:</b></div>
+            <div class="one-half push-right text-right right-padding"><span>{{ last_measurement.protein}} kg</span> <i class="fa fa fa-flask fa-fw"></i></div>
+        </div>
+        <div class="cf" data-ng-show="ifZitarice">
+            <div class="one-half push-left " style="font-size:16px;font-weight:bolder"><b>Gluten:</b></div>
+            <div class="one-half push-right text-right right-padding"><span>{{ last_measurement.gluten}} kg</span> <i class="fa fa fa-flask fa-fw"></i></div>
+        </div>
+    </div>
+
+    <div class="one-half push-right" data-ng-show="ifKukuruz || ifZitarice || ifZitarice">
+        <div class="cf">
+            <div class="one-half push-left"><b>Vlaga:</b></div>
+            <div class="one-half push-right text-right right-padding" >{{ last_measurement.vlaga}} % <i class="fa fa fa-flask fa-fw"></i></div>
+        </div>
+        <div class="cf">
+            <div class="one-half push-left"><b>Primese:</b></div>
+            <div class="one-half push-right text-right right-padding">{{ last_measurement.primese}} % <i class="fa fa fa-flask fa-fw"></i></div>
+        </div>
+        <div class="cf" data-ng-show="ifKukuruz">
+            <div class="one-half push-left"><b>Lom:</b></div>
+            <div class="one-half push-right text-right right-padding">{{ last_measurement.lom}} % <i class="fa fa fa-flask fa-fw"></i></div>
+        </div>
+        <div class="cf" data-ng-show="ifKukuruz">
+            <div class="one-half push-left"><b>Defekt:</b></div>
+            <div class="one-half push-right text-right right-padding">{{ last_measurement.defekt}} % <i class="fa fa fa-flask fa-fw"></i></div>
+        </div>
+        <div class="cf" data-ng-show="ifZitarice">
+            <div class="one-half push-left"><b>Energija:</b></div>
+            <div class="one-half push-right text-right right-padding">{{ last_measurement.energija}} % <i class="fa fa fa-flask fa-fw"></i></div>
+        </div>
+        <div class="cf" data-ng-show="ifZitarice">
+            <div class="one-half push-left"><b>Br padanja:</b></div>
+            <div class="one-half push-right text-right right-padding">{{ last_measurement.br_padanja}} <i class="fa fa fa-flask fa-fw"></i></div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<hr/>
+<div><h4><b><u>Obracun</u></b></h4></div>
+<div class="cf">
+    <div class="one-half push-left text-right"><b>Obracunska kolicina:</b></div>
+    <div class="one-squer push-left text-right">{{ last_measurement.neto }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+<div class="cf" data-ng-show="ifKukuruz">
+    <div class="one-half push-left text-right"><b>Sirov Rastur (kalo):</b></div>
+    <div class="one-squer push-left text-right">{{ last_measurement.kalo_rastur }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+<div class="cf" data-ng-show="ifSacma">
+    <div class="one-half push-left text-right"><b>Odbitak ili dodatak na vlagu:</b></div>
+    <div class="one-squer push-left text-right">{{ last_measurement.dnv }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+<div class="cf" data-ng-show="ifSacma">
+    <div class="one-half push-left text-right"><b>Odbitak ili dodatak na primese:</b></div>
+    <div class="one-squer push-left text-right">{{ last_measurement.dnp }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+
+<div class="cf" data-ng-show="ifZitarice">
+    <div class="one-half push-left text-right" ><b>Odbitak ili dodatak na hektolitar:</b></div>
+    <div class="one-squer push-left text-right">{{ last_measurement.dnh }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+<div class="cf" data-ng-show="ifKukuruz">
+    <div class="one-half push-left text-right" ><b>Odbitak ili dodatak na lom:</b></div>
+    <div class="one-squer push-left text-right">{{ last_measurement.dnl }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+<div class="cf" data-ng-show="ifKukuruz">
+    <div class="one-half push-left text-right"><b>Odbitak ili dodatak na defekt:</b></div>
+    <div class="one-squer push-left text-right">{{ last_measurement.dnd }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+<div class="cf" data-ng-show="ifSacma">
+    <div class="one-half push-left text-right" style="font-size:16px;font-weight:bolder"><b>SRPS:</b></div>
+    <div class="one-squer push-left text-right" style="font-size:16px;font-weight:bolder">{{ last_measurement.srps }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+<div class="cf" data-ng-show="ifKukuruz || ifZitarice">
+    <div class="one-half push-left text-right">&nbsp;</div>
+    <div class="one-squer push-left text-right">&nbsp;</div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+<div class="cf" data-ng-show="ifKukuruz || ifZitarice">
+    <div class="one-half push-left text-right"><b>Troskovi susenja:</b></div>
+    <div class="one-squer push-left text-right">{{ last_measurement.trosak_susenja }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+<div class="cf" data-ng-show="ifKukuruz || ifZitarice" >
+    <div class="one-half push-left text-right" style="font-size:16px;font-weight:bolder"><b>Suvo zrno na raspolaganju:</b></div>
+    <div class="one-squer push-left text-right"><span style="font-size:16px;font-weight:bolder">{{ last_measurement.suvo_zrno }} kg</span> <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+
+<!--<div class="cf" data-ng-show="ifZitarice">
+    <div class="one-half push-left text-right"><b>Troskovi susenja:</b></div>
+    <div class="one-squer push-left text-right">{{ last_measurement.trosak_susenja }} kg <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>
+<div class="cf" data-ng-show="ifZitarice" >
+    <div class="one-half push-left text-right" style="font-size:16px;font-weight:bolder"><b>Suvo zrno na raspolaganju:</b></div>
+    <div class="one-squer push-left text-right"><span style="font-size:16px;font-weight:bolder">{{ last_measurement.suvo_zrno }} kg</span> <i class="fa fa-arrows-h fa-fw"></i></div>
+    <div class="one-squer push-left">&nbsp;</div>
+</div>-->
+
+
+
+<div clss="cf" style="width:100%;position:absolute;bottom:0%">
+    <div class="one-squer push-left text-center">Magacioner<br/><br/>_______________</div>
+    <div class="one-squer push-left text-center">Kontrolna kuca<br/><br/>_______________</div>
+    <div class="one-squer push-right text-center">Kupac<br/><br/>________________</div>
+    <div class="one-squer push-right text-center">Vozac<br/><br/>_______________</div>
+</div>
+</div>
+
+
+
+

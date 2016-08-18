@@ -1,0 +1,131 @@
+<div class="page_wrapper">
+    <article class=" page_header cf">
+        <h1 class="page-title">
+            <i class="fa fa-pie-chart fa-lg"></i></i>
+            Stanja Magacina  <span>(Repromaterijal)</span></h1>
+    </article>
+{{ repromaterijal.naziv }}
+    <div style="border:1px solid #999;background-color:#fff;padding:15px 15px 0px 15px" class="cf">
+        <div class="smart-form" style="width:100%px">
+            <form id="stanje_form" method="post" name="stanje_form" ng-submit="getSearchStanje()" novalidate="" class="ng-pristine ng-valid ng-valid-minlength ng-valid-maxlength">
+               <div class="row">
+                <smart-select section-class="col col-sm-3 fixsection" label-class="select" select-class="input-sm"  placehold="Svi tipovi robe" name="type_of_good" model="send_data.type_of_good" options="r.id as r.naziv for r in repromaterijal" icon="for_infobox" action="data-ng-change='getResults()'"></smart-select>
+                <smart-select section-class="col col-sm-3 fixsection" label-class="select" select-class="input-sm"  placehold="Svi Magacini" name="type_of_good" model="send_data.wearehouse" options="w.wearehouse_id as w.wearehouse_name for w in wearehouses" icon="for_infobox" action="data-ng-change='getResults()'"></smart-select>
+               <div class="col col-sm-6">
+                   <div class="pull-right">
+                       <button type="button" class="btn btn-default" ng-click="print()"><i class="fa fa-print" ></i></button>
+                   </div>
+               </div>
+               </div>
+            </form>
+        </div>
+
+        <div class="row stanje_magacina">
+            <div class="alert alert-xs  alert-success" role="alert"><strong><i class="fa fa-info-circle"></i> </strong> {{napomena}}</div>
+        </div>
+    </div>
+
+    <div style="width:100%">
+        <div data-ng-repeat="(key, value) in results">
+
+            <div class="form-header font-sm font-white" style="margin-top:10px">
+                <span class="font-sm"><i class="fa fa-table"></i> {{key}}</span>
+                <div class="smart-form pull-right" style="margin-top:-1px">
+                    <input type="text"  placeholder="Filter" name="filter" data-ng-model="filter" style="border:1px inset #fff;padding:0px 5px"/> >
+                </div>
+            </div>
+            <div class="col-reservation-format" style="margin:0px;background-color: red">
+                <article class="cf">
+                    <span>Naziv proizvoda</span>
+                    <span><i class="fa fa-download fa-sm"></i> Ulaz  robe</span>
+                    <span><i class="fa fa-upload fa-sm"></i> Izlaz  robe</span>
+                    <span><i class="fa fa-database fa-sm"></i> Stanje  robe</span>
+                    <span><i class="fa fa-registered fa-sm"></i> Rezervisana  roba</span>
+                    <span><i class="fa fa-database fa-xs"></i>/<i class="fa fa-registered fa-xs"></i> Stanje sa rezervacijom</span>
+                </article>
+                <div class="cf" data-ng-repeat="r in value | filter:filter">
+                    <span>{{r.naziv_proizvoda}}</span>
+                    <span>{{r.ulaz}} {{r.merna_jedinica}} &nbsp;&nbsp;<button class="btn btn-xs  btn-success"><i class="fa fa-external-link-square"></i></button></span>
+                    <span>{{r.izlaz}} {{r.merna_jedinica}} &nbsp;&nbsp;<button class="btn btn-xs  btn-success"><i class="fa fa-external-link-square"></i></button></span>
+                    <span>{{r.stanje_magacina}} {{r.merna_jedinica}}</span>
+                    <span>{{r.rezervacija}} {{r.merna_jedinica}} &nbsp;&nbsp;<button class="btn btn-xs  btn-success"><i class="fa fa-external-link-square"></i></button></span>
+                    <span>{{r.stanje_rezervacija}} {{r.merna_jedinica}}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <style>
+        .rezervacije_print_head{
+            font-size:10px
+        }
+        .rezervacije_print_head div div{
+            float:left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align:right
+        }
+        .rezervacije_print_head div>div:nth-child(1){
+            width:28%;
+            text-align:left
+         }
+        .rezervacije_print_head div>div:nth-child(2){
+            width:14%
+        }
+        .rezervacije_print_head div>div:nth-child(3){
+            width:14%
+        }
+        .rezervacije_print_head div>div:nth-child(4){
+            width:14%
+        }
+        .rezervacije_print_head div>div:nth-child(5){
+            width:15%
+        }
+        .rezervacije_print_head div>div:nth-child(6){
+            width:15%
+        }
+    </style>
+
+    <!--PRINT VIEW-->
+    <div class="print_rezervacija" style="position:absolute;top:0%;left:0%;z-index:10;background:white;display:none">
+        <div class="print logo_area ">
+            <img src="public/img/raiffeisen_redovan2.png" width="300" style="padding-bottom:20px">
+            <div class="cf">
+                <div class="push-left"><strong><i class="fa fa-info-circle"></i> </strong> {{napomena}}</div>
+            </div>
+
+        </div>
+
+        <div data-ng-repeat="(key, value) in results">
+            <div class="form-header font-sm font-white" style="margin-top:10px">
+                <span class="font-md"><i class="fa fa-table" style=""></i> {{key}}</span>
+            </div>
+            <div class="rezervacije_print_head">
+                <div class="cf" style="border-bottom:1px solid #999">
+                    <div><b>Naziv proizvoda</b></div>
+                    <div><i class="fa fa-download fa-sm"></i> <b>Ulaz  robe</b></div>
+                    <div><i class="fa fa-upload fa-sm"></i> <b>Izlaz  robe</b></div>
+                    <div><i class="fa fa-database fa-sm"></i> <b>Stanje  robe</b></div>
+                    <div><i class="fa fa-registered fa-sm"></i> <b>Rezervisana  roba</b></div>
+                    <div><i class="fa fa-database fa-xs"></i>/<i class="fa fa-registered fa-xs"></i> <b>Stanje/Rezervacija</b></div>
+                </div>
+                <div class="cf" data-ng-repeat="r in value | filter:filter">
+                    <div>{{r.naziv_proizvoda}}</div>
+                    <div>{{r.ulaz}} {{r.merna_jedinica}} </div>
+                    <div>{{r.izlaz}} {{r.merna_jedinica}} </div>
+                    <div>{{r.stanje_magacina}} {{r.merna_jedinica}}</div>
+                    <div>{{r.rezervacija}} {{r.merna_jedinica}} </div>
+                    <div>{{r.stanje_rezervacija}} {{r.merna_jedinica}}</div>
+                </div>
+
+            </div>
+            <hr/>
+        </div>
+
+    </div>
+
+
+
+
+</div>

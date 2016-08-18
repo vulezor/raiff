@@ -1,0 +1,104 @@
+<div class="page_wrapper">
+
+    <article class=" page_header cf">
+        <h1 class="page-title">
+            <i class="fa-fw fa fa-file-text"></i>
+            Roba</h1>
+    </article>
+
+    <article class="">
+        <div class="row">
+            <div class="col-md-7" >
+                <div style="max-width: 680px">
+                    <div class="col-mg-12 form-header font-md font-white">
+                        <i class="fa fa-file-text"></i><span> Registrovanje robe</span>
+                    </div>
+                    <form id="user_form" class="form-horizontal" method="post" name="user_form"  ng-submit="addNewGood()" novalidate>
+                        <div class="form-frame background-white smart-form cf">
+                            <div class="row">
+                                <smart-input  label-class="input" icon="icon-prepend fa fa-file-text for_infobox" name="goods_cypher" model="goodsdata.goods_cypher" maxlength="15" directive="is-number" placehold="Šifra robe"></smart-input>
+                                <smart-input  label-class="input" icon="icon-prepend fa fa-file-text for_infobox" name="goods_name" model="goodsdata.goods_name" directive="custom-validation"  placehold="Naziv robe" ></smart-input>
+                            </div>
+                            <div class="row">
+                                <smart-select section-class="col col-sm-6 fixsection" label-class="select"  icon="for_infobox"  placehold="Dodeli vrstu robe" name="sort_of_goods_id" model="goodsdata.sort_of_goods_id" options="gs.sort_of_goods_id as gs.goods_sort | capitalize for gs in goods_class " action="ng-change='showGoodsSort()'"></smart-select>
+                                <smart-select section-class="col col-sm-6 fixsection" label-class="select"  icon="for_infobox" placehold="Dodeli tip robe" name="sort_of_type_id" model="goodsdata.sort_of_type_id" options="gt.type_of_goods_id as gt.goods_type | capitalize for gt in goods_type "></smart-select>
+                            </div>
+                            <div class="row">
+                                <smart-select section-class="col col-sm-offset-6 col-sm-4 fixsection" label-class="select"  icon="for_infobox" name="measurement_unit_id" placehold="Dodeli mernu jedinicu robe" model="goodsdata.measurement_unit_id" options="mu.measurement_unit_id as mu.measurement_name +', '+mu.measurement_unit | capitalize for mu in measure_unit "></smart-select>
+                                <section class="col col-sm-2 fixsection">
+                                    <label >
+                                        <button type="button" class="col col-sm-12 btn btn-default btn-sm pull-right" data-ng-click="doVisible()"><i class="fa fa-balance-scale "></i> Dodaj </button>
+                                    </label>
+
+                                    <!-- Place Container -->
+                                    <form>
+                                        <div class="absolute_container right scena" >
+                                            <div class="place_con nasceni ng-hide" ng-hide="goodsVisible"> <!--data-ng-class="{'nasceni':placeVisible===true,'vanscene':placeVisible===false}-->
+                                                <div class="row">
+                                                    <!-- oznaka -->
+                                                    <smart-input section-class="col col-sm-12 fixsection" label-class="input" icon="icon-prepend fa fa-balance-scale  for_infobox" name="measurement_name" model="new_measure_unit.measurement_name" directive="custom-validation" placehold="Naziv merne jedinice"></smart-input>
+                                                    <!-- Naziv merne jedinice -->
+                                                    <smart-input section-class="col col-sm-12 fixsection" label-class="input" icon="icon-prepend fa fa-balance-scale  for_infobox" name="measurement_unit" model="new_measure_unit.measurement_unit" directive="capitalize-in-input" maxl="2" placehold="Oznaka merne jedinice"></smart-input>
+                                                </div>
+                                                <!-- /Submit  -->
+                                                <div class="row">
+                                                    <section class="col col-sm-12 fixsection">
+                                                        <label class="input">
+                                                            <button type="button" class="btn btn-primary btn-sm pull-right" data-ng-click="addNewMeasureUnit()">Potvrdi</button>
+                                                            <i class="fa fa-cog fa-spin fa-2x pull-right load_new_place.ng-hide" ng-show="loadNewMeasureUnit" style="margin-right:10px" ></i>
+                                                        </label>
+                                                    </section><!-- /Submit  -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form><!-- /Place Container-->
+                                </section>
+                            </div>
+
+
+
+                            <div class="row">
+                                <section class="col-sm-offset-6 col col-sm-6 fixsection">
+                                    <label class="input">
+                                        <button type="submit" class="btn btn-sm btn-primary pull-right" id="unos_robe" >Potvrdi</button>
+                                    </label>
+                                    <i class="fa fa-cog fa-2x fa-spin pull-right ajax_load_visibility"></i>
+                                </section>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- USER TABLE -->
+    <article class="">
+        <div class="col-mg-12 form-header font-md font-white">
+            <i class="fa fa-table"></i><span> Lista registrovane robe u sistemu</span>
+
+            <a href="goods_api/printExcel">
+                <div class="pull-right">
+                    <div class="dropzone_2">
+                        <i class="fa  fa-download fa-fw" ></i> Download <i class="fa fa-file-excel-o fa-fw"></i>
+                    </div>
+                </div>
+            </a>
+            <div class="pull-right">
+                <div class="dropzone_2">
+                    <div><i class="fa fa-upload fa-fw"></i> Upload <i class="fa fa-file-excel-o fa-fw"></i></div>
+                    <input type="file" id="myfile" file-model="myFile"/>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="goodsList as userShowCase" style="position:relative">
+            <table datatable="" dt-options="userShowCase.dtOptions" dt-columns="userShowCase.dtColumns" dt-instance="userShowCase.dtInstance"   class="table table-striped table-bordered tables_font" cellspacing="0" cellpadding="0"  width="100%" style="width:0px;font-family:arial">
+                <!--<p>
+                    <button type="button" data-ng-click="showCase.stateChange()">Hello</button>
+                </p>-->
+            </table>
+        </div>
+    </article>
+

@@ -1,0 +1,425 @@
+/* Document made especiali for angular animation */
+/*.slide-animation.ng-enter, .slide-animation.ng-leave{
+    transition: 0.5s linear all;
+    position:relative;
+    left: 0;
+    right: 0;
+    height: 600px;
+}
+
+.slide-animation.ng-enter{
+    z-index: 100;
+    left: 100px;
+    opacity:0;
+}
+
+.slide-animation.ng-leave{
+    z-index: 101;
+    opacity: 1;
+    left: 0;
+}*/
+
+/*.slide-animation.ng-enter {
+    animation: 0.5s slide-animation-enter;
+}
+
+@keyframes slide-animation-enter{
+    from {
+        z-index:100;
+        left:100px;
+        opacity:0;
+    }
+    to {
+        left:0px;
+        opacity:1;
+    }
+}
+
+.slide-animation.ng-leave {
+    animation: 0.5s slide-animation-leave;
+}
+
+@keyframes slide-animation-leave{
+    from {
+        z-index:101;
+        left:0px;
+        opacity:1;
+    }
+    to {
+        left:-100px;
+        opacity:0;
+    }
+}*/
+
+.slide-animation.ng-enter, .slide-animation.ng-leave {
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    position:absolute;
+    height: 1000px;
+}
+
+.slide-animation.ng-enter {
+    z-index:101;
+    left:100px;
+    opacity:0;
+}
+
+.slide-animation.ng-enter.ng-enter-active {
+    left:0;
+    opacity:1;
+}
+
+.slide-animation.ng-leave {
+    z-index:100;
+    opacity:1;
+    left:0;
+
+}
+
+.slide-animation.ng-leave.ng-leave-active {
+    left:100px;
+    opacity:0;
+
+
+}
+
+
+.repeat-animation.ng-enter,
+.repeat-animation.ng-leave,
+.repeat-animation.ng-move {
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    position:relative;
+}
+
+.repeat-animation.ng-enter {
+    left:10px;
+    opacity:0;
+}
+.repeat-animation.ng-enter.ng-enter-active {
+    left:0;
+    opacity:1;
+}
+
+.repeat-animation.ng-leave {
+    left:10px;
+    opacity:1;
+}
+.repeat-animation.ng-leave.ng-leave-active {
+    left:-10px;
+    opacity:0;
+}
+
+.repeat-animation.ng-move {
+    opacity:0.5;
+}
+.repeat-animation.ng-move.ng-move-active {
+    opacity:1;
+}
+
+
+
+/***************NEW PLACE PANEL opcije*****************/
+@-webkit-keyframes nasceni {
+    0%   {-webkit-transform: rotateX(-50deg);opacity:0;}
+    25%  { -webkit-transform: rotateX(50deg);opacity:0.2;}
+    50%  { -webkit-transform: rotateX(-25deg);opacity:0.5;}
+    75% { -webkit-transform: rotateX(25deg);opacity:0.7;}
+    100% { -webkit-transform: rotateX(0deg);opacity:1;}
+
+}
+
+/* all other browsers */
+@keyframes nasceni {
+    0% {
+        -moz-transform: rotateX(-50deg);opacity:0;
+        -ms-transform: rotateX(-50deg);opacity:0;
+        transform: rotateX(-50deg);opacity:0;
+    }
+
+    25% {
+        -moz-transform: rotateX(50deg);opacity:0.2;
+        -ms-transform: rotateX(50deg);opacity:0.2;
+        transform: rotateX(50deg);opacity:0.2;
+    }
+    50% {
+        -moz-transform: rotateX(-25deg);opacity:0.5;
+        -ms-transform: rotateX(-25deg);opacity:0.5;
+        transform: rotateX(-25deg);opacity:0.5;
+    }
+    75% {
+        -moz-transform: rotateX(25deg);opacity:0.7;
+        -ms-transform: rotateX(25deg);opacity:0.7;
+        transform: rotateX(25deg);opacity:0.7;
+    }
+    100% {
+        -moz-transform: rotateX(0deg);opacity:1;
+        -ms-transform: rotateX(0deg);opacity:1;
+        transform: rotateX(0deg);opacity:1;
+    }
+
+}
+
+@-webkit-keyframes vanscene {
+    0%   { -webkit-transform: rotateX(0deg);opacity:1;}
+    25% { -webkit-transform: rotateX(25deg);opacity:0.7;}
+    50%  { -webkit-transform: rotateX(-25deg);opacity:0.5;}
+    75%  { -webkit-transform: rotateX(50deg);opacity:0.2;}
+    100%   {-webkit-transform: rotateX(-50deg);opacity:0;}
+
+}
+
+/* all other browsers */
+@keyframes vanscene {
+    0% {
+        -moz-transform: rotateX(0deg);opacity:1;
+        -ms-transform: rotateX(0deg);opacity:1;
+        transform: rotateX(0deg);opacity:1;
+    }
+    25% {
+        -moz-transform: rotateX(25deg);opacity:0.7;
+        -ms-transform: rotateX(25deg);opacity:0.7;
+        transform: rotateX(25deg);opacity:0.7;
+    }
+    50% {
+        -moz-transform: rotateX(-25deg);opacity:0.5;
+        -ms-transform: rotateX(-25deg);opacity:0.5;
+        transform: rotateX(-25deg);opacity:0.5;
+    }
+    75% {
+        -moz-transform: rotateX(50deg);opacity:0.2;
+        -ms-transform: rotateX(50deg);opacity:0.2;
+        transform: rotateX(50deg);opacity:0.2;
+    }
+    100% {
+        -moz-transform: rotateX(-50deg);opacity:0;
+        -ms-transform: rotateX(-50deg);opacity:0;
+        transform: rotateX(-50deg);opacity:0;
+    }
+
+}
+
+.scena {
+    -webkit-perspective: 1700px;
+    -moz-perspective: 1700px;
+    -ms-perspective: 1700px;
+    perspective: 700px;
+    /*background:rgba(0,0,0,0.5);*/
+    z-index:2;
+    top:100%;
+    margin-right:15px;
+
+}
+
+.nasceni {
+    -webkit-animation-name: nasceni;
+    -webkit-animation-timing-function: 1;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: 600ms;
+    /*-webkit-animation-delay:0s;*/
+    -webkit-animation-timing-function:ease-in-out;
+
+    animation-name: nasceni;
+    animation-timing-function: 1;
+    animation-iteration-count: 1;
+    animation-duration: 600ms;
+    /* animation-delay:0s;*/
+    animation-timing-function:ease-in-out;
+
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    -webkit-box-shadow: 0 0 7px 1px #777;
+    -moz-box-shadow: 0 0 7px 1px #777;
+    box-shadow: 0 0 7px 1px #777;
+    margin-top:10px;
+
+}
+.nasceni.ng-hide-add{
+    -webkit-animation-name: vanscene;
+    -webkit-animation-timing-function: 1;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: 600ms;
+    /*-webkit-animation-delay:0s;*/
+    -webkit-animation-timing-function:ease-in-out;
+
+    animation-name: vanscene;
+    animation-timing-function: 1;
+    animation-iteration-count: 1;
+    animation-duration: 600ms;
+    /* animation-delay:0s;*/
+    animation-timing-function:ease-in-out;
+
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    -webkit-box-shadow: 0 0 7px 1px #777;
+    -moz-box-shadow: 0 0 7px 1px #777;
+    box-shadow: 0 0 7px 1px #777;
+    margin-top:10px;
+}
+/***************NEW PLACE PANEL opcije*****************/
+
+
+
+
+/***************SHOW CLIENT PANEL IN ULAZ MERKANTILA*****************/
+@-webkit-keyframes clients_panel_anim_open {
+    0%   {-webkit-transform:  scale(0.9);opacity:0}
+    100% { -webkit-transform:  scale(1);opacity:1}
+
+}
+
+/* all other browsers */
+@keyframes clients_panel_anim_open {
+    0% {
+        -moz-transform: scale(0.9);opacity:0;
+        -ms-transform: scale(0.9);opacity:0;
+        transform: scale(0.9);opacity:0;
+    }
+    100% {
+        -moz-transform: scale(1);opacity:1;
+        -ms-transform: scale(1);opacity:1;
+        transform: scale(1);opacity:1;
+    }
+
+}
+
+@-webkit-keyframes clients_panel_anim_close {
+    0%   {-webkit-transform: scale(1);opacity:1;}
+    100% { -webkit-transform: scale(0.9);}
+
+}
+
+/* all other browsers */
+@keyframes clients_panel_anim_close {
+    0% {
+        -moz-transform: scale(1));opacity:1;
+        -ms-transform: scale(1);opacity:1;
+        transform: scale(1));opacity:1;
+    }
+    100% {
+        -moz-transform: scale(0.9);opacity:0;
+        -ms-transform: scale(0.9);opacity:0;
+        transform: scale(0.9);opacity:0;
+    }
+
+}
+
+.client-wrapper.ng-hide-remove{
+    -webkit-animation-name: clients_panel_anim_open;
+    -webkit-animation-timing-function: 1;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: 300ms;
+    /*-webkit-animation-delay:0s;*/
+    -webkit-animation-timing-function:ease-in-out;
+
+    animation-name: clients_panel_anim_open;
+    animation-timing-function: 1;
+    animation-iteration-count: 1;
+    animation-duration: 300ms;
+    /* animation-delay:0s;*/
+    animation-timing-function:ease-in-out;
+}
+
+.client-wrapper.ng-hide-add{
+    -webkit-animation-name: clients_panel_anim_close;
+    -webkit-animation-timing-function: 1;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: 300ms;
+    /*-webkit-animation-delay:0s;*/
+    -webkit-animation-timing-function:ease-in-out;
+
+    animation-name: clients_panel_anim_close;
+    animation-timing-function: 1;
+    animation-iteration-count: 1;
+    animation-duration: 300ms;
+    /* animation-delay:0s;*/
+    animation-timing-function:ease-in-out;
+}
+
+/***************SHOW GOOD PANEL IN ULAZ MERKANTILA*****************/
+@-webkit-keyframes goods_panel_anim_open {
+    0%   {-webkit-transform:  scale(0.9);opacity:0}
+    100% { -webkit-transform:  scale(1);opacity:1}
+
+}
+
+/* all other browsers */
+@keyframes goods_panel_anim_open {
+    0% {
+        -moz-transform: scale(0.9);opacity:0;
+        -ms-transform: scale(0.9);opacity:0;
+        transform: scale(0.9);opacity:0;
+    }
+    100% {
+        -moz-transform: scale(1);opacity:1;
+        -ms-transform: scale(1);opacity:1;
+        transform: scale(1);opacity:1;
+    }
+
+}
+
+@-webkit-keyframes goods_panel_anim_open {
+    0%   {-webkit-transform: scale(1);opacity:1;}
+    100% { -webkit-transform: scale(0.9);}
+
+}
+
+/* all other browsers */
+@keyframes goods_panel_anim_open {
+    0% {
+        -moz-transform: scale(1));opacity:1;
+        -ms-transform: scale(1);opacity:1;
+        transform: scale(1));opacity:1;
+    }
+    100% {
+        -moz-transform: scale(0.9);opacity:0;
+        -ms-transform: scale(0.9);opacity:0;
+        transform: scale(0.9);opacity:0;
+    }
+
+}
+
+
+
+.goods-wrapper.ng-hide-remove{
+    -webkit-animation-name: goods_panel_anim_open;
+    -webkit-animation-timing-function: 1;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: 300ms;
+    /*-webkit-animation-delay:0s;*/
+    -webkit-animation-timing-function:ease-in-out;
+
+    animation-name: clients_panel_anim_open;
+    animation-timing-function: 1;
+    animation-iteration-count: 1;
+    animation-duration: 300ms;
+    /* animation-delay:0s;*/
+    animation-timing-function:ease-in-out;
+}
+
+.goods-wrapper.ng-hide-add{
+    -webkit-animation-name: goods_panel_anim_open;
+    -webkit-animation-timing-function: 1;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: 300ms;
+    /*-webkit-animation-delay:0s;*/
+    -webkit-animation-timing-function:ease-in-out;
+
+    animation-name: clients_panel_anim_close;
+    animation-timing-function: 1;
+    animation-iteration-count: 1;
+    animation-duration: 300ms;
+    /* animation-delay:0s;*/
+    animation-timing-function:ease-in-out;
+}
+

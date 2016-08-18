@@ -1,0 +1,180 @@
+<div class="page_wrapper">
+
+    <article class="page_header cf">
+        <h1 class="page-title">
+            <i class="fa-fw fa fa-user"></i>
+            Korisnik <span>(izmena podataka )</span></h1>
+    </article>
+
+    <article class="">
+        <div class="row">
+            <div class="col-md-7" >
+                <div style="max-width: 680px">
+                    <div class="col-mg-12 form-header font-md font-white">
+                        <i class="fa fa-user"></i><span> <b>Korisnik:</b> {{ userdata.name +' '+ userdata.surname }} (Izmena podataka)</span>
+                    </div>
+                    <form id="user_form" class="form-horizontal" method="post" name="user_form"  ng-submit="addNewUser()" novalidate>
+                        <div class="form-frame background-white smart-form cf">
+
+                            <div class="row">
+                                <section class="col col-sm-6 fixsection">
+                                    <label class="input">
+                                        <i class="icon-prepend fa fa-user"></i>
+                                        <input type="text" class="input-sm" name="name" placeholder="Ime" data-ng-model="userdata.name"  custom-validation required/>
+                                    </label>
+                                </section>
+
+                                <section class="col col-sm-6 fixsection">
+                                    <label class="input">
+                                        <i class="icon-prepend fa fa-user"></i>
+                                        <input type="text" class="input-sm" name="surname" placeholder="Prezime" data-ng-model="userdata.surname" custom-validation required/>
+                                    </label>
+                                </section>
+                            </div>
+
+                            <div class="row">
+                                <section class="col col-sm-6 fixsection">
+                                    <label class="input">
+                                        <i class="icon-prepend fa fa-home"></i>
+                                        <input type="text" class="input-sm" name="address" placeholder="Adresa" data-ng-model="userdata.address" custom-validation required/>
+                                    </label>
+                                </section>
+
+                                <section class="col col-sm-4 fixsection">
+                                    <label class="select">
+                                        <select name="selectedPlaceId" class="input-sm" id="selectedPlaceId" data-ng-model="userdata.selectedPlaceId" ng-options="p.place_id as p.place_name+' '+p.post_number for p in Places | orderBy:'p.place_name'" required>
+                                            <option value="">Mesto/Naselje Korisnika</option>
+                                        </select>
+                                        <i></i>
+                                    </label>
+                                </section>
+
+                                <section class="col col-sm-2 fixsection">
+                                    <label >
+                                        <button type="button" class="col col-sm-12 btn btn-default btn-sm pull-right" data-ng-click="doVisible()"><i class="fa fa-building-o"></i> Dodaj </button>
+                                    </label>
+                                    <!-- Place Container -->
+                                    <form>
+                                        <div class="absolute_container right scena" >
+                                            <div class="place_con nasceni ng-hide" ng-hide="placeVisible"> <!--data-ng-class="{'nasceni':placeVisible===true,'vanscene':placeVisible===false}-->
+                                                <!-- Postanski broj -->
+                                                <div class="row">
+                                                    <section class="col col-sm-12 fixsection">
+                                                        <label class="input">
+                                                            <i class="icon-prepend fa fa-building-o"></i>
+                                                            <input type="text" class="input-sm"  name="post_number" id="post_number" placeholder="Poštanski broj" data-ng-model="new_places.post_number" is-number />
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-sm-12 fixsection">
+                                                        <label class="input">
+                                                            <i class="icon-prepend fa fa-building-o"></i>
+                                                            <input type="text" class="input-sm" name="place_name" id="place_name" placeholder="Naziv mesta/naselja" data-ng-model="new_places.place_name" custom-validation />
+                                                        </label>
+                                                    </section>
+                                                </div>
+                                                <!-- Naziv Mesta -->
+
+                                                <!-- /Submit  -->
+                                                <div class="row">
+                                                    <section class="col col-sm-12 fixsection">
+                                                        <label class="input">
+                                                            <button type="button" class="btn btn-primary btn-sm pull-right" data-ng-click="addNewPlace()">Potvrdi</button>
+                                                            <i class="fa fa-cog fa-spin fa-2x pull-right load_new_place.ng-hide" ng-show="loadNewPlace" style="margin-right:10px" ></i>
+                                                        </label>
+                                                    </section><!-- /Submit  -->
+                                                </div>
+                                            </div>
+                                        </div><!-- /Place Container-->
+                                    </form>
+                                </section>
+                            </div>
+
+                            <div class="row">
+                                <section class="col col-sm-3 fixsection">
+                                    <label class="input">
+                                        <i class="icon-prepend fa fa-user"></i>
+                                        <input type="text" class="input-sm" name="brlk" placeholder="brlk" data-ng-model="userdata.brlk" is-number required />
+                                    </label>
+                                </section>
+
+                                <section class="col col-sm-3 fixsection">
+                                    <label class="input">
+                                        <i class="icon-prepend fa fa-user"></i>
+                                        <input type="text" class="input-sm" name="sup" placeholder="Sup" data-ng-model="userdata.sup" custom-validation  required/>
+                                    </label>
+                                </section>
+
+                                <section class="col col-sm-6 fixsection">
+                                    <label class="input">
+                                        <i class="icon-prepend fa fa-user"></i>
+                                        <input type="text" class="input-sm" name="jmbg" placeholder="JMBG" data-ng-model="userdata.jmbg" is-number required/>
+                                    </label>
+                                </section>
+
+                            </div>
+
+                            <div class="row">
+                                <section class="col col-sm-6 fixsection">
+                                    <label class="input">
+                                        <i class="icon-prepend fa fa-envelope"></i>
+                                        <input type="text" class="input-sm"  name="email" placeholder="email" data-ng-model="userdata.email" required>
+                                    </label>
+                                </section>
+
+                                <section class="col col-sm-6 fixsection">
+                                    <label class="select">
+                                        <select name="role" id="role" class="input-sm" data-ng-model="userdata.role" ng-options="r.role as r.label for r in roles | orderBy:'r.role'" ng-change="showWarehouseSelect()">
+                                            <option value="">Izaberi ulogu korisnika</option>
+                                        </select>
+                                        <i></i>
+                                    </label>
+                                </section>
+                            </div>
+
+                            <div class="row">
+                                <section class="col col-sm-6 fixsection">
+                                    <label class="input">
+                                        <i class="icon-prepend fa fa-user"></i>
+                                        <input type="text" class="input-sm" name="username" placeholder="Korisničko ime" data-ng-model="userdata.username" >
+                                    </label>
+                                </section>
+
+                                <section class="col col-sm-6 fixsection">
+                                    <label class="input">
+                                        <i class="icon-prepend fa fa-key"></i>
+                                        <input type="text" class="input-sm" name="password" placeholder="Lozinka" data-ng-model="userdata.password">
+                                    </label>
+                                </section>
+                            </div>
+
+                            <div class="row" ng-hide="wearehouseVisibility">
+                                <section class="col col-sm-6 fixsection">
+                                    <label class="select">
+                                        <select name="selectedWarehouseId" class="input-sm" id="selectedWarehouseId" data-ng-model="userdata.selectedWarehouseId" ng-options="w.wearehouse_id as w.wearehouse_name for w in Warehouses | orderBy:'w.wearehouse_name'">
+                                            <option value="">Dodeli Magacin Korisniku</option>
+                                        </select>
+                                        <i></i>
+                                    </label>
+                                </section>
+                            </div>
+
+                            <div class="row">
+                                <section class="col col-sm-12 fixsection">
+                                    <label class="input">
+                                        <button type="submit" class="btn btn-sm btn-primary pull-right" id="unos_korisnika"  style="margin-left:5px" >Izmeni</button>
+
+                                    </label>
+                                    <i class="fa fa-cog fa-2x fa-spin pull-right ajax_load_visibility"></i>
+                                    <a href="#/korisnici" class="btn btn-sm btn-primary pull-left" ><i class="fa fa-arrow-left"></i> Povratak</a>
+                                </section>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+</div>

@@ -1,0 +1,422 @@
+<div class="page_wrapper" data-ng-class="{'blur': show_dispozicija===true}">
+    <article class="page_header cf">
+        <h1 class="page-title">
+            <i class="fa fa-home fa-lg"></i>
+            Raiffeisen-Agro > <span>Dashboard</span>  </h1>
+    </article>
+    <style>
+
+        .fancy_menu{
+            color: #333;
+            border: 1px solid #C2C2C2;
+            background: #fafafa;
+            cursor: move;
+            -moz-border-radius: 0;
+            -khtml-border-radius: 0;
+            -webkit-border-radius: 0;
+            border-radius: 0;
+            line-height: normal;
+            box-shadow: inset 0 -2px 0 rgba(0,0,0,.05);
+            -moz-box-shadow: inset 0 -2px 0 rgba(0,0,0,.05);
+            -webkit-box-shadow: inset 0 -2px 0 rgba(0,0,0,.05);
+        }
+        .fancy_menu .widget-icon {
+            display: block;
+            width: 30px;
+            height: 32px;
+            position: relative;
+            float: left;
+            font-size: 111%;
+            line-height: 32px;
+            text-align: center;
+            margin-right: -10px;
+        }
+
+        .fancy_menu  .nav {
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+            height: 32px;
+        }
+        .fancy_menu .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+            color: #555;
+            cursor: default;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-bottom-color: transparent;
+        }
+        .fancy_menu .nav-tabs>li.active>a {
+            -webkit-box-shadow: 0 -2px 0 #57889c;
+            -moz-box-shadow: 0 -2px 0 #57889c;
+            box-shadow: 0 -2px 0 #6B7652;
+            border-top-width: 0!important;
+            margin-top: 1px!important;
+            font-weight: 700;
+            line-height: 1.1;
+            padding: 9px 15px 10px 15px;
+        }
+        .fancy_menu .nav-tabs>li>a {
+            margin-right: 2px;
+            line-height: 0.9;
+            border: 1px solid transparent;
+        }
+        .fancy_menu .nav>li>a {
+            position: relative;
+            display: block;
+            padding: 11px 15px;
+        }
+        .fancy_menu .nav-tabs>li>a {
+            border-radius: 0;
+            font-size:12px;
+            color: #333;
+        }
+        /*submenu*/
+        .bottom_orange_menu{
+            margin:0px;
+            padding:0px;
+            background-color: #ffffff;
+            border-bottom:1px solid #aaa/*#57889C/*#C2C2C2*/
+        }
+        .bottom_orange_menu li{
+            list-style:none;
+            float:left;
+            font-size:12px;
+            margin:0px;padding:0px;
+
+
+
+        }
+        .bottom_orange_menu li a:link,
+        .bottom_orange_menu li a:visited{
+            color:#6B7652;
+            line-height:2;
+            padding:0px 10px;
+            text-decoration: none;
+
+        }
+        .bottom_orange_menu li.active_submenu{
+            border-bottom:2px solid  #aaa/*#57889C/*#FF3300*/;
+            background-color:#aaa;
+            text-shadow:0px 1px #fff;
+            font-weight:bold;
+
+        }
+        .bottom_orange_menu li a.active_submenu{
+
+        }
+        .bottom_orange_menu li a:hover{
+            text-decoration: none;
+        }
+        /*table-header*/
+        .mag_tab_header{
+             width:calc(100% - 17px);
+
+         }
+        .mag_tab_body{
+            width: 100%;
+            -webkit-transition: all 0.25s ease-in-out;
+            -moz-transition: all 0.25s ease-in-out;
+            -o-transition: all 0.25s ease-in-out;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .mag_tab_header>div{
+            float:left;
+            font-size:11px;
+            font-weight:bold;
+            text-align: right;
+            padding:5px 5px
+        }
+        .mag_tab_body:nth-child(even){background-color:#ccc}
+        .mag_tab_body:nth-child(odd){background-color:#fff}
+        .mag_tab_body:nth-child(even):hover, .mag_tab_body:nth-child(odd):hover{
+            background-color:#FF3300;
+            color:#FFF;
+        }
+
+        .mag_tab_body>div{
+            float:left;
+            font-size:11px;
+            text-align: right;
+            padding:4px 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .mag_tab_header>div:first-of-type, .mag_tab_body>div:first-of-type{
+            text-align: left;
+        }
+
+        .mag_tab_header>div:nth-child(1), .mag_tab_body>div:nth-child(1){width:30%}
+        .mag_tab_header>div:nth-child(2), .mag_tab_body>div:nth-child(2){width:14%}
+        .mag_tab_header>div:nth-child(3), .mag_tab_body>div:nth-child(3){width:14%}
+        .mag_tab_header>div:nth-child(4), .mag_tab_body>div:nth-child(4){width:14%}
+        .mag_tab_header>div:nth-child(5), .mag_tab_body>div:nth-child(5){width:14%}
+        .mag_tab_header>div:nth-child(6), .mag_tab_body>div:nth-child(6){width:14%}
+        .fancy_menu{
+            color:#6B7652;
+        }
+
+        .zaglavlje_dnevnog{
+            border:1px solid #C2C2C2;
+            background:#fff;
+        }
+        .zaglavlje_dnevnog.smart-form section{
+            margin:0px;
+            margin-top:5px;
+            margin-bottom:5px
+        }
+
+        .otp_tab_header{
+            width:calc(100% - 17px);
+
+        }
+        .otp_tab_header>div{
+            float:left;
+            font-size:11px;
+            font-weight:bold;
+            text-align: left;
+            padding:5px 5px
+        }
+        .otp_tab_header>div:nth-child(1), .otp_tab_body>div:nth-child(1){width:10%}
+        .otp_tab_header>div:nth-child(2), .otp_tab_body>div:nth-child(2){width:29%}
+        .otp_tab_header>div:nth-child(3), .otp_tab_body>div:nth-child(3){width:10%}
+        .otp_tab_header>div:nth-child(4), .otp_tab_body>div:nth-child(4){width:27%}
+        .otp_tab_header>div:nth-child(5), .otp_tab_body>div:nth-child(5){width:22%;text-align: right}
+
+        .otp_tab_body:nth-child(even){background-color:#ccc}
+        .otp_tab_body:nth-child(odd){background-color:#fff}
+        .otp_tab_body:nth-child(even):hover, .otp_tab_body:nth-child(odd):hover{
+            background-color:#FF3300;
+            color:#FFF;
+        }
+
+        .otp_tab_body>div{
+            float:left;
+            font-size:11px;
+            text-align: left;
+            padding:4px 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+    </style>
+    <article>
+        <div class="row">
+            <div class="col col-lg-6">
+                <div class="fancy_menu cf">
+                    <span class="widget-icon"> <i class="glyphicon glyphicon-stats "></i>  </span><span style="font-size:12px;line-height:2.6;padding-left:10px"><b>{{ mg_info }}</b></span>
+                    <div style="position:absolute;width:58%;top:0%;margin-top:1px" class="smart-form">
+
+                    </div>
+                    <ul class="nav nav-tabs pull-right in" id="myTab">
+                        <li class="active">
+                            <a data-toggle="tab" href="" data-ng-disabled="true"><!--<i class="fa fa-clock-o"></i>--><span class="hidden-mobile hidden-tablet">Repromaterijal</span></a>
+                        </li>
+
+                        <li>
+                            <a data-toggle="tab" href="" data-ng-disabled="true"><!--<i class="fa fa-facebook"></i>--> <span class="hidden-mobile hidden-tablet">Merkantila</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="border:1px solid #C2C2C2">
+
+                        <ul class="bottom_orange_menu cf smart-form">
+                            <li ng-repeat="(key, value) in svi_rezultati" ng-class="{'active_submenu':key===sub_key}">
+                                <a href="" data-ng-disabled="true"  ng-class="{'active_submenu':key===sub_key}" ng-click="getGoodType(key)">{{ key }}</a>
+                            </li>
+
+                        </ul>
+
+                    <div style="height:373px;background:#FFF">
+                        <div style="background-color:#aaa;color:#5d6747;width:100%;text-shadow: 0px 1px #eeebea">
+                            <div class="mag_tab_header cf" >
+                                <div>Naziv proizvoda</div>
+                                <div>Ulaz Robe</div>
+                                <div>izlaz robe</div>
+                                <div>Stanje robe</div>
+                                <div>Rezervacija</div>
+                                <div>Stanje/Rez</div>
+                            </div>
+                        </div>
+                        <div style="overflow-x:hidden;overflow-y:scroll;height:348px;position:relative">
+                            <div class="mag_tab_body cf" ng-repeat="good in rep_good_type" >
+                                <div>{{ good.naziv_proizvoda }}</div>
+                                <div>{{ good.ulaz }} {{ good.merna_jedinica }}</div>
+                                <div>{{ good.izlaz }} {{ good.merna_jedinica }}</div>
+                                <div>{{ good.stanje_magacina }} {{ good.merna_jedinica }}</div>
+                                <div>{{ good.rezervacija }} {{ good.merna_jedinica }}</div>
+                                <div>{{ good.stanje_rezervacija }} {{ good.merna_jedinica }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-sm-6">
+                <div class="col-mg-12 form-header font-md font-white">
+                    <i class="fa fa-database"></i><span> Lokacije magacina </span>
+                </div>
+                <div style="border:1px solid #C2C2C2;padding-right:1px;">
+                    <div id="map" style="height: 402px;position:relative;z-index:5000;overflow:hidden;"></div>
+                </div>
+
+            </div>
+        </div>
+        <br/>
+
+        <div class="row">
+            <div class="col col-lg-6">
+                <div class="">
+                    <div class="col-mg-12 form-header font-md font-white">
+                        <i class="fa fa-upload"></i><span> Otpremljen repromaterijal na dan {{odabir_datuma}} (Svi magacini) </span>
+                    </div>
+                    <div class="zaglavlje_dnevnog smart-form cf">
+                        <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-calendar for_infobox" placehold="Odaberi datum"  name="odabir_datuma" model="odabir_datuma" directive="custom-validation" action=""></smart-input>
+                    </div>
+                    <div style="height:350px;background:#fff;border:1px solid #C2C2C2;border-top:none">
+                        <div style="background-color:#aaa;color:#5d6747;width:100%;text-shadow: 0px 1px #eeebea">
+                            <div class="otp_tab_header cf" >
+                                <div>Otp.br</div>
+                                <div>Kupac</div>
+                                <div>Tip</div>
+                                <div>Naziv</div>
+                                <div>Kolicina</div>
+                            </div>
+                            <div style="overflow-x:hidden;overflow-y:scroll;height:324px;position:relative;background-color:#fff">
+                                <div class="otp_tab_body cf" ng-repeat="outputs in daily_outputs" >
+                                    <div><label class="label label-primary" style="cursor:pointer;font-weight:normal" data-ng-click="getOtpremnica(outputs.output_id)">{{ outputs.doc_br }} </label></div>
+                                    <div>{{ outputs.firm_name }}</div>
+                                    <div>{{ outputs.goods_type }}</div>
+                                    <div>{{ outputs.goods_name }}</div>
+                                    <div>({{outputs.measurement_unit}}) <b>{{ outputs.kolicina }}</b> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-lg-6"></div>
+        </div>
+    </article>
+
+    <!--PRINT PRIRPEMA-->
+
+    <div class="print_otprema" style="position:absolute;top:0%;left:0%;z-index:10;display:none">
+        <div class="print logo_area ">
+            <img src="public/img/raiffeisen_redovan2.png" width="300" style="padding-bottom:20px">
+            <div class="cf">
+                <div class="one-half push-left"><b>Dokument br:</b> <i class="fa fa-file-text-o fa-fw"></i> {{ last_measurement.document_br }}</div>
+                <div class="one-half push-right text-right"><b>Datum i vreme:</b>
+                    <i class="fa fa-calendar fa-fw"></i> {{ last_measurement.date+' - '+ last_measurement.time}} <i class="fa fa-clock-o  fa-fw"></i>
+                </div>
+            </div>
+            <div class="cf">
+                <div class="one-half push-left"><b>Magacin:</b> <i class="fa fa-database fa-fw"></i> {{ last_measurement.wearehouse_name }}</div>
+                <div class="one-half push-right text-right"><b>Magacioner:</b> <i class="fa fa-user fa-fw"></i> {{ last_measurement.storekeeper }}</div>
+            </div>
+            <div class="cf" ng-show="last_measurement.dispozicija_id !== '0'">
+                <div class="one-half push-left"><b>Poziv na dispoziciju:</b> <i class="fa fa-truck fa-fw"></i> {{ last_measurement.dispozicija_id }}</div>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="text-center"><h3>Otpremnica br: <i class="fa fa-file-text-o fa-fw"></i> {{ last_measurement.document_br }}</h3></div>
+        <div class="cf">
+            <div class="one-half push-left"><h4><b><u>Kupac robe</u></b></h4></div>
+            <div class="one-half push-right text-right"><h4><b><u>Prodavac robe</u></b></h4></div>
+        </div>
+
+        <div class="cf">
+            <div class="one-half push-left">
+                <div class="cf">
+                    <div><b>Kupac:</b> {{  last_measurement.client_cypher+', '+last_measurement.firm_name }}</div>
+                    <div><b>Mesto:</b> {{ last_measurement.post_number+' '+last_measurement.place_name }}</div>
+                    <div><b>Adresa:</b> {{ last_measurement.client_address }}</div>
+                    <div ng-show="last_measurement.client_brlk != 0"><b>Br.Licne karte:</b> {{ last_measurement.client_brlk +', '+ last_measurement.client_sup }}</div>
+                    <div ng-show="last_measurement.client_jmbg != 0"><b>JMBG:</b> {{ last_measurement.client_jmbg}}</div>
+                    <div ng-show="last_measurement.br_agricultural != ''"><b>BPG:</b> {{ last_measurement.br_agricultural }}</div>
+                    <div ng-show="last_measurement.pib != 0"><b>PIB:</b> {{ last_measurement.pib }}</div>
+                    <div><b>Vozac:</b> {{ last_measurement.driver_name}}</div>
+                    <div><b>Registarske table :</b> {{ last_measurement.vehicle_registration | uppercase }}</div>
+                </div>
+            </div>
+            <div class="one-half push-right">
+                <div class="cf">
+                    <div class="text-right"><b>Prodavac:</b> RWA Srbija d.o.o</div>
+                    <div class="text-right"><b>Mesto:</b> 10070 Novi Beograd</div>
+                    <div class="text-right"><b>Adresa:</b> Bulevar Zorana Đinđića 67/17,</div>
+                    <div class="text-right"><b>PIB:</b> 105528683</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div data-ng-hide="ifMereno">
+
+            <hr/>
+            <div ><h4><b><u>Vaga </u></b></h4></div>
+            <div class="cf">
+                <div class="one-half push-left">
+                    <div class="cf">
+                        <div class="one-half push-left"><b>Bruto:</b></div>
+                        <div class="one-half push-right text-right right-padding">{{ last_measurement.bruto}} kg <i class="fa fa-balance-scale fa-fw"></i></div>
+                    </div>
+                    <div class="cf">
+                        <div class="one-half push-left"><b>Tara:</b></div>
+                        <div class="one-half push-right text-right right-padding">{{ last_measurement.tara}} kg <i class="fa fa-balance-scale fa-fw"></i></div>
+                    </div>
+                    <div class="cf" >
+                        <div class="one-half push-left " style="font-size:16px;font-weight:bolder"><b>Neto:</b></div>
+                        <div class="one-half push-right text-right right-padding"><span style="font-size:16px;font-weight:bolder">{{ last_measurement.neto}} kg</span> <i class="fa fa-balance-scale fa-fw"></i></div>
+                    </div>
+
+                </div>
+
+                <div class="one-half push-right" data-ng-show="ifSacma">
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <hr/>
+        <div><h4><b><u></u></b></h4></div>
+        <div class="cf">
+            <div class="push-left" style="width:50%"><b>Naziv proizvoda:</b></div>
+            <div class="push-left" style="width:15%"><b>Tip proizvoda:</b></div>
+            <div class="push-left text-right" style="width:10%"><b>Lot</b></div>
+            <div class="push-left text-center" style="width:15%"><b>Kolicina</b></div>
+            <div class="push-left" style="width:10%"><b>M.J</b></div>
+        </div>
+        <div class="cf"  data-ng-show="ifMereno" style="font-size:12px">
+            <div data-ng-repeat="output in last_measurement.outputs">
+                <div class="push-left" style="width:50%">{{ $index + 1 +'. '+ output.goods_name}}</div>
+                <div class="push-left" style="width:15%">{{ output.goods_type | capitalize }}</div>
+                <div class="push-left text-right" style="width:10%">{{ output.lot === "" ? "&nbsp;" : output.lot}}</div>
+                <div class="push-left text-right" style="width:15%">{{ output.kolicina }}&nbsp; &nbsp; &nbsp; &nbsp; </div>
+                <div class="push-left" style="width:10%">({{output.measurement_unit}})</div>
+            </div>
+        </div>
+        <div class="cf"  data-ng-hide="ifMereno" style="font-size:12px">
+            <div data-ng-repeat="input in last_measurement.outputs">
+                <div class="push-left" style="width:50%">{{ $index + 1 +'. '+ output.goods_name}}</div>
+                <div class="push-left" style="width:15%">{{ output.goods_type | capitalize }}</div>
+                <div class="push-left text-right" style="width:10%">{{ output.lot === '' ? '&nbsp;' : output.lot}}</div>
+                <div class="push-left text-right" style="width:15%">{{ output.neto }}&nbsp; &nbsp; &nbsp; &nbsp; </div>
+                <div class="push-left" style="width:10%">(KG)</div>
+            </div>
+        </div>
+
+
+
+        <div clss="cf" style="width:100%;position:absolute;bottom:0%">
+            <div class="one-third push-left text-center">Magacioner<br/><br/>____________________</div>
+            <div class="one-third push-left text-center">Kupac<br/><br/>____________________</div>
+            <div class="one-third push-right text-center">Vozac<br/><br/>____________________</div>
+        </div>
+    </div>
+
+</div>

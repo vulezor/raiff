@@ -1,0 +1,493 @@
+<div class="page_wrapper">
+<div class="setup_page">
+    <article class=" page_header cf">
+        <h1 class="page-title">
+            <i class="fa fa-cog fa-lg"></i></i>
+            Podešavanja kod obracuna merkantile</h1>
+    </article>
+
+    <article>
+        <div class="srps_section">
+            <!--<h4>SRPS Vrednosti</h4>
+            <hr/>-->
+            <form id="srps_form"  method="post" name="srps_form"  data-ng-submit="updateSrps()" novalidate>
+                <div style="width:650px;position:relative">
+                    <div class="save_message" id="srps_message">
+                        <i class="fa fa-check"> </i>SRPS parametri su snimljeni
+                    </div>
+                    <div class="form-header font-md font-white client_panel_header" >
+                        <i class="fa fa-table " ></i> SRPS parametri
+                    </div>
+                    <div class="srps_body">
+                        <div class="cf">
+                            <div class="pull-left">Poljoprivredna kultura</div>
+                            <div class="pull-left">Vlaga</div>
+                            <div class="pull-left">Primese</div>
+                            <div class="pull-left">Hektolitar</div>
+                            <div class="pull-left">Lom</div>
+                            <div class="pull-left">Defekt</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Pšenica</div>
+                            <div class="pull-left"><input type="text" name="psenica_vlaga" data-ng-model="srps_vrednost.psenica_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left"><input type="text" name="psenica_primese" data-ng-model="srps_vrednost.psenica_primese" is-number maxlength="5"></div>
+                            <div class="pull-left"><input type="text" name="psenica_hektolitar" data-ng-model="srps_vrednost.psenica_hektolitar" is-number maxlength="5"></div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Ječam</div>
+                            <div class="pull-left"><input type="text" name="jecam_vlaga" data-ng-model="srps_vrednost.jecam_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left"><input type="text" name="jecam_primese" data-ng-model="srps_vrednost.jecam_primese" is-number maxlength="5"></div>
+                            <div class="pull-left"><input type="text" name="jecam_hektolitar" data-ng-model="srps_vrednost.jecam_hektolitar" is-number maxlength="5"></div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Uljana Repica</div>
+                            <div class="pull-left"><input type="text" name="uljana_vlaga" data-ng-model="srps_vrednost.uljana_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left"><input type="text" name="uljana_primese" data-ng-model="srps_vrednost.uljana_primese" is-number maxlength="5"></div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Suncokret</div>
+                            <div class="pull-left"><input type="text" name="suncokret_vlaga" data-ng-model="srps_vrednost.suncokret_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left"><input type="text" name="suncokret_primese" data-ng-model="srps_vrednost.suncokret_primese" is-number maxlength="5"></div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Soja</div>
+                            <div class="pull-left"><input type="text" name="soja_vlaga" data-ng-model="srps_vrednost.soja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left"><input type="text" name="soja_primese" data-ng-model="srps_vrednost.soja_primese" is-number maxlength="5"></div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Kukuruz</div>
+                            <div class="pull-left"><input type="text" name="kukuruz_vlaga" data-ng-model="srps_vrednost.kukuruz_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left"><input type="text" name="kukuruz_primese" data-ng-model="srps_vrednost.kukuruz_primese" is-number maxlength="5"></div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left"><input type="text" name="kukuruz_lom" data-ng-model="srps_vrednost.kukuruz_lom" is-number maxlength="5"></div>
+                            <div class="pull-left"><input type="text" name="kukuruz_defekt" data-ng-model="srps_vrednost.kukuruz_defekt" is-number maxlength="5"></div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left"><i class="fa fa-cog fa-2x fa-spin pull-right ajax_load_visibility" style="margin-top:10px;margin-right:-15px"></i>&nbsp;</div>
+                            <div class="pull-left">
+                                <button type="submit" class="btn btn-primary btn-sm pull-right" style="margin:5px 7px 0px 7px">Potvrdi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </article>
+    <article>
+        <div class="bonifikacija_section">
+            <!--<h4>Margine pozitivne i negativne bonifikacije</h4>
+            <hr/>-->
+            <form id="bonifikacija_form"  method="post" name="bonifikacija_form"  data-ng-submit="updateBonifikacija()" novalidate>
+                <div style="width:800px;position:relative">
+                    <div class="save_message" id="bonifikacija_message">
+                        <i class="fa fa-check"> </i>Parametri bonifikacije su snimljeni
+                    </div>
+                    <div class="form-header font-md font-white client_panel_header" >
+                        <i class="fa fa-table " ></i> Margine bonifikacije
+                    </div>
+                    <div class="bonifikacija_body">
+
+                        <div class="cf">
+                            <div class="pull-left">Poljoprivredna kultura</div>
+                            <div class="pull-left">Vlaga</div>
+                            <div class="pull-left">Primese</div>
+                            <div class="pull-left">Hektolitar</div>
+                            <div class="pull-left">Lom</div>
+                            <div class="pull-left">Defekt</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Margine bonifikacije</div>
+                            <div class="pull-left" style="width:7.5%">donja</div>
+                            <div class="pull-left" style="width:7.5%">gornja</div>
+                            <div class="pull-left" style="width:7.5%">donja</div>
+                            <div class="pull-left" style="width:7.5%">gornja</div>
+                            <div class="pull-left" style="width:7.5%">donja</div>
+                            <div class="pull-left" style="width:7.5%">gornja</div>
+                            <div class="pull-left" style="width:7.5%">donja</div>
+                            <div class="pull-left" style="width:7.5%">gornja</div>
+                            <div class="pull-left" style="width:7.5%">donja</div>
+                            <div class="pull-left" style="width:7.5%">gornja</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Pšenica</div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="psenica_donja_vlaga" data-ng-model="bonifikacija.psenica_donja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="psenica_gornja_vlaga" data-ng-model="bonifikacija.psenica_gornja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="psenica_donja_primesa" data-ng-model="bonifikacija.psenica_donja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="psenica_gornja_primesa" data-ng-model="bonifikacija.psenica_gornja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="psenica_donja_hektolitar" data-ng-model="bonifikacija.psenica_donja_hektolitar" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="psenica_gornja_hektolitar" data-ng-model="bonifikacija.psenica_gornja_hektolitar" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Ječam</div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="jecam_donja_vlaga" data-ng-model="bonifikacija.jecam_donja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="jecam_gornja_vlaga" data-ng-model="bonifikacija.jecam_gornja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="jecam_donja_primesa" data-ng-model="bonifikacija.jecam_donja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="jecam_gornja_primesa" data-ng-model="bonifikacija.jecam_gornja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="jecam_donja_hektolitar" data-ng-model="bonifikacija.jecam_donja_hektolitar" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="jecam_gornja_hektolitar" data-ng-model="bonifikacija.jecam_gornja_hektolitar" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Uljana Repica</div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="uljana_donja_vlaga" data-ng-model="bonifikacija.uljana_donja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="uljana_gornja_vlaga" data-ng-model="bonifikacija.uljana_gornja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="uljana_donja_primesa" data-ng-model="bonifikacija.uljana_donja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="uljana_gornja_primesa" data-ng-model="bonifikacija.uljana_gornja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Suncokret</div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="suncokret_donja_vlaga" data-ng-model="bonifikacija.suncokret_donja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="suncokret_gornja_vlaga" data-ng-model="bonifikacija.suncokret_gornja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="suncokret_donja_primesa" data-ng-model="bonifikacija.suncokret_donja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="suncokret_gornja_primesa" data-ng-model="bonifikacija.suncokret_gornja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Soja</div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="soja_donja_vlaga" data-ng-model="bonifikacija.soja_donja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="soja_gornja_vlaga" data-ng-model="bonifikacija.soja_gornja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="soja_donja_primesa" data-ng-model="bonifikacija.soja_donja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="soja_gornja_primesa" data-ng-model="bonifikacija.soja_gornja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Kukuruz</div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="kukuruz_donja_vlaga" data-ng-model="bonifikacija.kukuruz_donja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="kukuruz_gornja_vlaga" data-ng-model="bonifikacija.kukuruz_gornja_vlaga" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="kukuruz_donja_primesa" data-ng-model="bonifikacija.kukuruz_donja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="kukuruz_gornja_primesa" data-ng-model="bonifikacija.kukuruz_gornja_primesa" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%">&nbsp;</div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="kukuruz_donja_lom" data-ng-model="bonifikacija.kukuruz_donja_lom" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="kukuruz_gornja_lom" data-ng-model="bonifikacija.kukuruz_gornja_lom" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="kukuruz_donja_defekt" data-ng-model="bonifikacija.kukuruz_donja_defekt" is-number maxlength="5"></div>
+                            <div class="pull-left" style="width:7.5%"><input type="text" name="kukuruz_gornja_defekt" data-ng-model="bonifikacija.kukuruz_gornja_defekt" is-number maxlength="5"></div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">
+                                <button type="submit" class="btn btn-primary btn-sm pull-right" style="margin:5px 7px 0px 7px">Potvrdi</button>
+                                <i class="fa fa-cog fa-2x fa-spin pull-right ajax_load_visibility" style="margin-top:10px"></i>&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </article>
+
+    <article>
+        <div class="ukuruz_tabela_section">
+            <!--<h4>Margine pozitivne i negativne bonifikacije</h4>
+            <hr/>-->
+            <form id="kukuruz_tabela_form"  method="post" name="kukuruz_tabela_form"  data-ng-submit="updateKukuruzTabela()" novalidate>
+                <div style="width:1000px;position:relative">
+                    <div class="save_message" id="kukuruz_tabela_message">
+                        <i class="fa fa-check"> </i>Tabela koeficijenta za svođenje na suvo zrno kod kukuruza je snimljena!
+                    </div>
+                    <div class="form-header font-md font-white client_panel_header" >
+                        <i class="fa fa-table " ></i> Tabela koeficijenta za svođenje na suvo zrno kod kukuruza
+                    </div>
+                    <div class="kukuruz_tabela_body">
+                        <div class="cf">
+                            <div class="pull-left">14,1-14,5</div>
+                            <div class="pull-left">14,51 - 15</div>
+                            <div class="pull-left">15,1 - 15,5</div>
+                            <div class="pull-left">15,51 - 16</div>
+                            <div class="pull-left">16,1 - 16,5</div>
+                            <div class="pull-left">16,51 - 17</div>
+                            <div class="pull-left">17,1 - 17,5</div>
+                            <div class="pull-left">17,51 - 18</div>
+                            <div class="pull-left">18,1 - 18,5</div>
+                            <div class="pull-left">18,51 - 19</div>
+                            <div class="pull-left">19,1 - 19,5</div>
+                            <div class="pull-left">19,51 - 20</div>
+                            <div class="pull-left">20,1 - 20,5</div>
+                            <div class="pull-left">20,51 - 21</div>
+                            <div class="pull-left">21,1 - 21,5</div>
+                            <div class="pull-left">21,51 - 22</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left"><input type="text" name="ku14" data-ng-model="ktabela.ku14" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku14_5" data-ng-model="ktabela.ku14_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku15" data-ng-model="ktabela.ku15" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku15_5" data-ng-model="ktabela.ku15_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku16" data-ng-model="ktabela.ku16" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku16_5" data-ng-model="ktabela.ku16_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku17" data-ng-model="ktabela.ku17" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku17_5" data-ng-model="ktabela.ku17_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku18" data-ng-model="ktabela.ku18" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku18_5" data-ng-model="ktabela.ku18_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku19" data-ng-model="ktabela.ku19" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku19_5" data-ng-model="ktabela.ku19_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku20" data-ng-model="ktabela.ku20" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku20_5" data-ng-model="ktabela.ku20_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku21" data-ng-model="ktabela.ku21" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku21_5" data-ng-model="ktabela.ku21_5" is-number /></div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">22,1-22,5</div>
+                            <div class="pull-left">22,51 - 23</div>
+                            <div class="pull-left">23,1 - 23,5</div>
+                            <div class="pull-left">23,51 - 24</div>
+                            <div class="pull-left">24,1 - 24,5</div>
+                            <div class="pull-left">24,51 - 25</div>
+                            <div class="pull-left">25,1 - 25,5</div>
+                            <div class="pull-left">25,51 - 26</div>
+                            <div class="pull-left">26,1 - 26,5</div>
+                            <div class="pull-left">26,51 - 27</div>
+                            <div class="pull-left">27,1 - 27,5</div>
+                            <div class="pull-left">27,51 - 28</div>
+                            <div class="pull-left">28,1 - 28,5</div>
+                            <div class="pull-left">28,51 - 29</div>
+                            <div class="pull-left">29,1 - 29,5</div>
+                            <div class="pull-left">29,51 - 30</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left"><input type="text" name="ku22" data-ng-model="ktabela.ku22" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku22_5" data-ng-model="ktabela.ku22_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku23" data-ng-model="ktabela.ku23" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku23_5" data-ng-model="ktabela.ku23_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku24" data-ng-model="ktabela.ku24" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku24_5" data-ng-model="ktabela.ku24_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku25" data-ng-model="ktabela.ku25" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku25_5" data-ng-model="ktabela.ku25_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku26" data-ng-model="ktabela.ku26" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku26_5" data-ng-model="ktabela.ku26_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku27" data-ng-model="ktabela.ku27" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku27_5" data-ng-model="ktabela.ku27_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku28" data-ng-model="ktabela.ku28" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku28_5" data-ng-model="ktabela.ku28_5" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku29" data-ng-model="ktabela.ku29" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ku29_5" data-ng-model="ktabela.ku29_5" is-number /></div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left"><i class="fa fa-cog fa-2x fa-spin pull-right ajax_load_visibility" style="margin-top:8px;margin-right:15px"></i>&nbsp;</div><!---->
+                            <div class="pull-left cf"><button type="submit" class="btn btn-primary btn-sm pull-right" style="margin:5px 7px 0px 7px">Potvrdi</button></div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </article>
+
+    <article>
+        <div class="psenica_tabela_section">
+            <!--<h4>Margine pozitivne i negativne bonifikacije</h4>
+            <hr/>-->
+            <form id="psenica_tabela_form"  method="post" name="psenica_tabela_form"  data-ng-submit="updatePsenicaTabela()" novalidate>
+                <div style="width:800px;position:relative">
+                    <div class="save_message" id="psenica_tabela_message">
+                        <i class="fa fa-check"> </i> Tabela koeficijenta za svođenje na suvo zrno kod pšenice je snimljena!
+                    </div>
+                    <div class="form-header font-md font-white client_panel_header" >
+                        <i class="fa fa-table " ></i> Tabela koeficijenta za svođenje na suvo zrno kod pšenice
+                    </div>
+                    <div class="psenica_tabela_body">
+                        <div class="cf">
+                            <div class="pull-left">14,1-14,5</div>
+                            <div class="pull-left">14,51 - 15</div>
+                            <div class="pull-left">15,1 - 15,5</div>
+                            <div class="pull-left">15,51 - 16</div>
+                            <div class="pull-left">16,1 - 16,5</div>
+                            <div class="pull-left">16,51 - 17</div>
+                            <div class="pull-left">17,1 - 17,5</div>
+                            <div class="pull-left">17,51 - 18</div>
+                            <div class="pull-left">18,1 - 18,5</div>
+                            <div class="pull-left">18,51 - 19</div>
+                            <div class="pull-left">19,1 - 19,5</div>
+                            <div class="pull-left">19,51 - 20</div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left"><input type="text" name="ps14" data-ng-model="ptabela.ps14" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps14_50" data-ng-model="ptabela.ps14_50" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps15" data-ng-model="ptabela.ps15" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps15_50" data-ng-model="ptabela.ps15_50" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps16" data-ng-model="ptabela.ps16" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps16_50" data-ng-model="ptabela.ps16_50" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps17" data-ng-model="ptabela.ps17" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps17_50" data-ng-model="ptabela.ps17_50" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps18" data-ng-model="ptabela.ps18" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps18_50" data-ng-model="ptabela.ps18_50" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps19" data-ng-model="ptabela.ps19" is-number /></div>
+                            <div class="pull-left"><input type="text" name="ps19_50" data-ng-model="ptabela.ps19_50" is-number /></div>
+                        </div>
+
+                        <div class="cf">
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left"><i class="fa fa-cog fa-2x fa-spin pull-right ajax_load_visibility" style="margin-top:8px;margin-right:15px"></i>&nbsp;</div><!---->
+                            <div class="pull-left cf"><button type="submit" class="btn btn-primary btn-sm pull-right" style="margin:5px 7px 0px 7px">Potvrdi</button></div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </article>
+
+    <article>
+        <div class="obracun_vlage_section">
+            <!--<h4>Margine pozitivne i negativne bonifikacije</h4>
+            <hr/>-->
+            <form id="obracun_vlage_form"  method="post" name="obracun_vlage_form"  data-ng-submit="updateObracunVlage()" novalidate>
+                <div style="width:540px;position:relative;font-size:12px">
+                    <div class="save_message" id="obracun_vlage_message">
+                        <i class="fa fa-check"> </i>Način obračunavanja vlage je snimljen!
+                    </div>
+                    <div class="form-header font-md font-white client_panel_header" >
+                        <i class="fa fa-table " ></i> Obracun vlage kod merkantile
+                    </div>
+                    <div class="obracun_vlage_body">
+                        <div class="cf">
+                            <div class="pull-left">Poljoprivredna kultura</div>
+                            <div class="pull-left">Procenat 1:1</div>
+                            <div class="pull-left cf" >
+                                <div class="pull-left">Neto * </div>
+                                <div class="pull-right"style="width:70%;">
+                                    <div style="line-height:normal;border-bottom:1px solid black;width:97%">100 * ulazna vlaga</div>
+                                    <div style="line-height:normal;">100 * SRPS vlaga</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Pšenica</div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="psenica_obracun" id="psenica_obracun_procenat" data-ng-model="obracun.psenica_obracun" type="radio"  value="procenat"><label for="psenica_obracun_procenat"></label></div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="psenica_obracun" id="psenica_obracun_formula" data-ng-model="obracun.psenica_obracun" type="radio"  value="formula"><label for="psenica_obracun_formula"></label></div>
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Ječam</div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="jecam_obracun" id="jecam_obracun_procenat" data-ng-model="obracun.jecam_obracun" type="radio"  value="procenat"><label for="jecam_obracun_procenat"></label></div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="jecam_obracun" id="jecam_obracun_formula" data-ng-model="obracun.jecam_obracun" type="radio"  value="formula"><label for="jecam_obracun_formula"></label></div>
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Uljana Repica</div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="uljana_obracun" id="uljana_obracun_procenat" data-ng-model="obracun.uljana_obracun" type="radio"  value="procenat"><label for="uljana_obracun_procenat"></label></div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="uljana_obracun" id="uljana_obracun_formula" data-ng-model="obracun.uljana_obracun" type="radio"  value="formula"><label for="uljana_obracun_formula"></label></div>
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Suncokret</div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="suncokret_obracun" id="suncokret_obracun_procenat" data-ng-model="obracun.suncokret_obracun" type="radio"  value="procenat"><label for="suncokret_obracun_procenat"></label></div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="suncokret_obracun" id="suncokret_obracun_formula" data-ng-model="obracun.suncokret_obracun" type="radio"  value="formula"><label for="suncokret_obracun_formula"></label></div>
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Soja</div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="soja_obracun" id="soja_obracun_procenat" data-ng-model="obracun.soja_obracun" type="radio"  value="procenat"><label for="soja_obracun_procenat"></label></div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="soja_obracun" id="soja_obracun_formula" data-ng-model="obracun.soja_obracun" type="radio"  value="formula"><label for="soja_obracun_formula"></label></div>
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">Kukuruz</div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="kukuruz_obracun" id="kukuruz_obracun_procenat" data-ng-model="obracun.kukuruz_obracun" type="radio"  value="procenat"><label for="kukuruz_obracun_procenat"></label></div>
+                            </div>
+                            <div class="pull-left">
+                                <div class="radio radio-primary radio-inline"><input name="kukuruz_obracun" id="kukuruz_obracun_formula" data-ng-model="obracun.kukuruz_obracun" type="radio"  value="formula"><label for="kukuruz_obracun_formula"></label></div>
+                            </div>
+                        </div>
+                        <div class="cf">
+                            <div class="pull-left">&nbsp;</div>
+                            <div class="pull-left">&nbsp;</div><!---->
+                            <div class="pull-left">
+                                <button type="submit" class="btn btn-primary btn-sm  pull-right" style="margin:4px 7px 0px 7px">Potvrdi</button>
+                                <i class="fa fa-cog fa-2x fa-spin pull-right ajax_load_visibility" style="margin-top:8px;margin-left:-10px"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </article>
+
+
+
+</div>
+</div>

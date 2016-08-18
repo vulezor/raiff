@@ -1,0 +1,107 @@
+<div class="page_wrapper">
+
+    <article class=" page_header cf">
+        <h1 class="page-title">
+            <i class="fa-fw fa fa-group"></i>
+            Korisnici</h1>
+    </article>
+
+    <article class="">
+        <div class="row">
+            <div class="col-md-7" >
+                <div style="max-width: 680px">
+                    <div class="col-mg-12 form-header font-md font-white">
+                        <i class="fa fa-group"></i><span> Dodavanje korisnika u sistem</span>
+                    </div>
+                    <form id="user_form" class="form-horizontal" method="post" name="user_form"  ng-submit="addNewUser()" novalidate>
+                        <div class="form-frame background-white smart-form cf">
+                            <div class="row">
+                                <smart-input  label-class="input" icon="icon-prepend fa fa-user for_infobox" name="name" model="userdata.name" directive="custom-validation" placehold="Ime korisnika"></smart-input>
+                                <smart-input  label-class="input" icon="icon-prepend fa fa-user for_infobox" name="surname" model="userdata.surname" directive="custom-validation"  placehold="Prezime korisnika" ></smart-input>
+                            </div>
+                            <div class="row">
+                                <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-home for_infobox" name="address" model="userdata.address" directive="custom-validation" placehold="Adresa korisnika"></smart-input>
+                                <smart-select section-class="col col-sm-4 fixsection" label-class="select"  icon="for_infobox" name="selectedPlaceId" placehold="Mesto/Naselje Korisnika" model="userdata.selectedPlaceId" options="p.place_id as p.place_name+' '+p.post_number for p in Places | orderBy:'p.place_name'" ></smart-select>
+
+                                <section class="col col-sm-2 fixsection">
+                                    <label >
+                                        <button type="button" class="col col-sm-12 btn btn-default btn-sm pull-right" data-ng-click="doVisible()"><i class="fa fa-building-o"></i> Dodaj </button>
+                                    </label>
+
+                                    <!-- Place Container -->
+                                    <form>
+                                        <div class="absolute_container right scena" >
+                                            <div class="place_con nasceni ng-hide" ng-hide="placeVisible"> <!--data-ng-class="{'nasceni':placeVisible===true,'vanscene':placeVisible===false}-->
+                                                <div class="row">
+                                                    <!-- Postanski broj -->
+                                                    <smart-input section-class="col col-sm-12 fixsection" label-class="input" icon="icon-prepend fa fa-building-o for_infobox" name="post_number" model="new_places.post_number" directive="is-number" placehold="Poštanski broj"></smart-input>
+                                                    <!-- Naziv mesta/naselja -->
+                                                    <smart-input section-class="col col-sm-12 fixsection" label-class="input" icon="icon-prepend fa fa-building-o for_infobox" name="place_name" model="new_places.place_name" directive="custom-validation" placehold="Naziv mesta/naselja"></smart-input>
+                                                </div>
+                                                <!-- /Submit  -->
+                                                <div class="row">
+                                                    <section class="col col-sm-12 fixsection">
+                                                        <label class="input">
+                                                            <button type="button" class="btn btn-primary btn-sm pull-right" data-ng-click="addNewPlace()">Potvrdi</button>
+                                                            <i class="fa fa-cog fa-spin fa-2x pull-right load_new_place.ng-hide" ng-show="loadNewPlace" style="margin-right:10px" ></i>
+                                                        </label>
+                                                    </section><!-- /Submit  -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form><!-- /Place Container-->
+                                </section>
+                            </div>
+                            <div class="row">
+                                <smart-input section-class="col col-sm-3 fixsection" label-class="input" icon="icon-prepend fa fa-user for_infobox" name="brlk" model="userdata.brlk" directive="is-number" placehold="brlk"></smart-input>
+                                <smart-input section-class="col col-sm-3 fixsection" label-class="input" icon="icon-prepend fa fa-user for_infobox" name="sup" model="userdata.sup" directive="custom-validation" placehold="Sup"></smart-input>
+                                <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user for_infobox" name="jmbg" model="userdata.jmbg" directive="is-number" placehold="JMBG"></smart-input>
+                            </div>
+
+                            <div class="row">
+                                <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-envelope for_infobox" name="email" model="userdata.email" placehold="Email"></smart-input>
+                                <smart-select section-class="col col-sm-6 fixsection" label-class="select"  icon="for_infobox" name="role" placehold="Izaberi ulogu korisnika" model="userdata.role" options="r.role as r.label for r in roles | orderBy:'r.role'" action="ng-change='showWarehouseSelect()'"></smart-select>
+
+
+                            </div>
+
+                            <div class="row">
+                                <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user for_infobox" name="username" model="userdata.username" directive=" "  placehold="Korisničko ime"></smart-input>
+                                <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user for_infobox" name="password" model="userdata.password"  placehold="Lozinka"></smart-input>
+                            </div>
+
+                            <div class="row" ng-hide="wearehouseVisibility">
+                                <smart-select section-class="col col-sm-6 fixsection" label-class="select"  icon="for_infobox" name="selectedWarehouseId" placehold="Izaberi ulogu korisnika" model="userdata.selectedWarehouseId" options="w.wearehouse_id as w.wearehouse_name for w in Warehouses | orderBy:'w.wearehouse_name'" ></smart-select>
+                            </div>
+
+                            <div class="row">
+                                <section class="col-sm-offset-6 col col-sm-6 fixsection">
+                                    <label class="input">
+                                        <button type="submit" class="btn btn-sm btn-primary pull-right" id="unos_korisnika" >Potvrdi</button>
+                                    </label>
+                                    <i class="fa fa-cog fa-2x fa-spin pull-right ajax_load_visibility"></i>
+                                </section>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- USER TABLE -->
+    <article class="">
+        <div class="col-mg-12 form-header font-md font-white">
+            <i class="fa fa-table"></i><span> Lista svih korisnika sistema</span>
+        </div>
+        <div ng-controller="userList as userShowCase" style="position:relative">
+            <table datatable="" dt-options="userShowCase.dtOptions" dt-columns="userShowCase.dtColumns" dt-instance="userShowCase.dtInstance"   class="table table-striped table-bordered tables_font" cellspacing="0" cellpadding="0"  width="100%" style="width:0px;font-family:arial">
+                <!--<p>
+                    <button type="button" data-ng-click="showCase.stateChange()">Hello</button>
+                </p>-->
+            </table>
+        </div>
+    </article>
+
+</div>

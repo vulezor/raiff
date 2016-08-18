@@ -1,0 +1,102 @@
+<div class="page_wrapper">
+    <article class=" page_header cf">
+        <h1 class="page-title">
+            <i class="fa-fw fa fa-database"></i>
+            Magacini
+            <span/>/ Skladišta</span></h1>
+    </article>
+
+    <article class="">
+        <div class="row">
+            <div class="col-md-6" >
+                <div style="max-width: 100%">
+                    <div class="col-mg-12 form-header font-md font-white">
+                        <i class="fa fa-database"></i><span> Dodavanje magacina u sistem</span>
+                    </div>
+                        <form id="wearhouse_form" class="form-horizontal" method="post" name="wearhouse_form"  ng-submit="addWarehouse()" novalidate>
+                            <div class="form-frame background-white">
+                                <!-- Naziv Magacina/Skladišta -->
+                                <form-input label="Naziv magacina/skladišta:" form-id="wearehouse_name" type="text" model="data.wearehouse_name" directive="custom-validation" required /></form-input><!-- /Naziv Magacina/Skladišta -->
+                                <!-- Adresa Magacina/Skladišta -->
+                                <form-input label="Adresa magacina/skladišta:" form-id="wearehouse_address" type="text" model="data.wearehouse_address" directive="custom-validation"  required/></form-input><!-- /Adresa Magacina/Skladišta -->
+
+
+
+                                <!-- Mesto Magacina/Skladišta -->
+                                <section class="form-group" >
+                                    <label class="col-sm-5 control-label font-sm" for="wearehouse_place">Mesto magacina/skladišta:</label>
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <select  name="wearehouse_place" id="wearehouse_place" class="form-control input-sm col-md-12" ng-model="data.selectedPlaceId" ng-change="changedValue(selectedPlaceId)" ng-options="p.place_id as p.place_name+' '+ p.post_number for p in Places | orderBy:'p.place_name'">
+                                                    <option value="">-----Izaberi-----</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3" style="position:relative;z-index:3000">
+                                                <button type="button" class="btn btn-default btn-sm col-md-12 pull-right"  data-ng-click="doVisible()">Dodaj</button>
+
+                                                <!-- Place Container -->
+                                                 <div class="absolute_container right scena" >
+                                                     <div class="place_con nasceni ng-hide" ng-hide="placeVisible"> <!--data-ng-class="{'nasceni':placeVisible===true,'vanscene':placeVisible===false}-->
+                                                         <!-- Postanski broj -->
+                                                         <form-input label="Poštanski broj:" label-class="col-sm-4 control-label" div-class="col-md-8" input-class="form-control input-sm" maxl="5" form-id="new_post_number" type="text" model="new_post_number" directive="is-number"/></form-input><!-- /Postanski broj  -->
+                                                         <!-- Naziv Mesta -->
+                                                         <form-input label="Naziv mesta:" label-class="col-sm-4 control-label" div-class="col-md-8" input-class="form-control input-sm"  form-id="new_place_name" type="text" model="new_place_name" directive="custom-validation"/></form-input><!-- /Naziv Mesta  -->
+
+                                                         <!-- /Submit  -->
+                                                         <section class="form-group">
+                                                             <div class="col-md-8 col-md-offset-4">
+
+                                                                 <button type="button" class="btn btn-primary btn-sm pull-right" data-ng-click="insertNewPlace()">Potvrdi</button>
+                                                                 <i class="fa fa-cog fa-spin fa-3x pull-right load_new_place.ng-hide" ng-hide="loadNewPlace" style="margin-right:10px" ></i>
+                                                             </div>
+                                                         </section><!-- /Submit  -->
+
+                                                     </div>
+                                                 </div><!-- /Place Container-->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section><!-- /Mesto Magacina/Skladišta -->
+                                <!-- Model Vage -->
+                                <form-select label="Model vage:" label-class="col-sm-5 control-label font-sm" div-class="col-md-7" select-class="form-control input-sm"  form-id="scale_model"  model="data.selectedModel" options="m.model as m.label for m in scale_models | orderBy:'m.model'"/></form-select><!-- /Model Vage -->
+                                <!-- Port Vage -->
+                                <form-select label="Port Vage:" label-class="col-sm-5 control-label font-sm" div-class="col-md-7" select-class="form-control input-sm"  form-id="scale_model"  model="data.selectedPort" options="p.port as p.port for p in ports | orderBy:'p.port'"/></form-select><!-- /Port Vage -->
+                                <!-- /Submit  -->
+                                <section class="form-group">
+                                    <div class="col-md-7 col-md-offset-5">
+                                        <input type="hidden" ng-model="data.longitude" id="long" name="long">
+                                        <label style="font-size:12px;padding:0px;margin:0px">longitude: {{ data.longitude }}</label><br/>
+                                        <input type="hidden" ng-model="data.latitude" id="lati" name="lati">
+                                        <label style="font-size:12px;padding:0px;margin:0px">latitude: {{ data.latitude }}</label>
+                                        <button type="submit" class="btn btn-primary btn-sm pull-right" >Potvrdi</button>
+                                    </div>
+                                </section><!-- /Submit  -->
+                            </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-mg-12 form-header font-md font-white">
+                <i class="fa fa-map"></i><span> Obeležavanje pozicije magacina</span>
+                </div>
+                <div id="mapCanvas" class="map-frame"></div>
+            </div>
+        </div>
+    </article>
+
+    <article class="">
+        <div class="col-mg-12 form-header font-md font-white">
+            <i class="fa fa-table"></i><span> Dodavanje magacina u sistem</span>
+        </div>
+        <div ng-controller="WithAjaxCtrl as showCase" style="position:relative">
+            <table datatable="" dt-options="showCase.dtOptions" dt-columns="showCase.dtColumns" dt-instance="showCase.dtInstance"   class="table table-striped table-bordered tables_font" cellspacing="0" cellpadding="0"  width="100%" style="width:0px;font-family:arial">
+            <!--<p>
+                <button type="button" data-ng-click="showCase.stateChange()">Hello</button>
+            </p>-->
+            </table>
+        </div>
+    </article>
+
+</div>

@@ -1,0 +1,125 @@
+<div class="page_wrapper">
+
+    <article class=" page_header cf">
+        <h1 class="page-title">
+            <i class="fa fa-user-plus fa-lg"></i></i>
+            Kupci / Dobavljači</h1>
+    </article>
+
+    <article class="">
+        <div class="row">
+            <div class="col-md-7" >
+                <div style="max-width: 780px">
+                    <div class="col-mg-12 form-header font-md font-white">
+                        <i class="fa fa-user-plus fa-lg"></i></i><span> Dodavanje kupaca/dobavljača u sistem</span>
+                        <i  ng-class="{'fa fa-caret-square-o-down': formVisibility === 'open', 'fa fa-caret-square-o-up': formVisibility === 'close'}" class="pull-right fix-caret"  data-ng-click="changeFormVisibility()" ></i></i>
+                    </div>
+
+                    <div ng-class="{'smform-body open_form': formVisibility === 'open', 'smform-body close_form': formVisibility === 'close'}">
+                        <form id="client_form" class="form-horizontal" method="post" name="client_form"  ng-submit="addNewClient()" novalidate>
+                            <div class="form-frame background-white smart-form cf">
+                                <div class="row">
+                                    <smart-select section-class="col col-sm-6 fixsection" label-class="select" select-class="input-sm"  placehold="Tip kupca/dobavljača" name="client_type" model="clientdata.client_type" options="t.type as t.label for t in client_types | orderBy:'t.label'" icon="for_infobox"></smart-select>
+                                    <smart-select section-class="col col-sm-6 fixsection" label-class="select" select-class="input-sm"  placehold="U sistemu PDV-a" name="syspdv" model="clientdata.syspdv" options="pdv.text as pdv.label for pdv in sisem_pdv | orderBy:'pdv.text'" icon="for_infobox"></smart-select>
+                                </div>
+                                <div class="row">
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user-plus for_infobox" placehold="Šifra kupca/dobavljača" name="cypher" model="clientdata.cypher"></smart-input>
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-home for_infobox" placehold="Naziv firme, poljoprivrednog gazdinstva" name="firmname"  model="clientdata.firmname" directive="custom-validation"></smart-input>
+                                </div>
+                                <div class="row">
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user-plus for_infobox" placehold="Ime odgovornog lica" name="name" model="clientdata.name" directive="custom-validation"></smart-input>
+                                    <smart-input sectionClass="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user-plus for_infobox" placehold="Prezime odgovornog lica" name="surname" model="clientdata.surname" directive="custom-validation"></smart-input>
+                                </div>
+                                <div class="row">
+                                    <smart-input section-class="col col-sm-3 fixsection" label-class="input" icon="icon-prepend fa fa-user-plus for_infobox" placehold="Broj lične karte" name="brlk" model="clientdata.brlk" directive="is-number"></smart-input>
+                                    <smart-input section-class="col col-sm-3 fixsection" label-class="input" icon="icon-prepend fa fa-user-plus for_infobox" placehold="Sup" name="sup" model="clientdata.sup" directive="custom-validation"></smart-input>
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user-plus for_infobox" placehold="JMBG odgovornog lica" name="jmbg" model="clientdata.jmbg" directive="is-number"></smart-input>
+                                </div>
+                                <div class="row">
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-home for_infobox" placehold="Adresa Firme/Polj.Gazdinstva" name="address" model="clientdata.address" directive="custom-validation"></smart-input>
+                                    <smart-select section-class="col col-sm-4 fixsection" label-class="select" select-class="input-sm" name="selectedPlaceId"  placehold="Odaberi mesto kupca/dobavljača"  model="clientdata.selectedPlaceId" options="p.place_id as p.place_name+' '+p.post_number for p in Places | orderBy:'p.place_name'" icon="for_infobox"></smart-select>
+
+                                    <section class="col col-sm-2 fixsection">
+                                        <label >
+                                            <button type="button" class="col col-sm-12 btn btn-default btn-sm pull-right" data-ng-click="doVisible()"><i class="fa fa-building-o"></i> Dodaj </button>
+                                        </label>
+                                        <!-- Place Container -->
+                                        <form>
+                                            <div class="absolute_container right scena" >
+                                                <div class="place_con nasceni ng-hide" ng-hide="placeVisible"> <!--data-ng-class="{'nasceni':placeVisible===true,'vanscene':placeVisible===false}-->
+                                                    <!-- Postanski broj -->
+                                                    <div class="row">
+                                                        <smart-input section-class="col col-sm-12 fixsection" label-class="input" icon="icon-prepend fa fa-building-o for_infobox" placehold="Poštanski broj" name="post_number" model="new_places.post_number" directive="is-number"></smart-input>
+                                                        <smart-input section-class="col col-sm-12 fixsection" label-class="input" icon="icon-prepend fa fa-building-o for_infobox" placehold="Naziv mesta/naselja" name="place_name" model="new_places.place_name" directive="custom-validation"></smart-input>
+                                                    </div>
+                                                    <!-- Naziv Mesta -->
+
+                                                    <!-- /Submit  -->
+                                                    <div class="row">
+                                                        <section class="col col-sm-12 fixsection">
+                                                            <label class="input">
+                                                                <button type="button" class="btn btn-primary btn-sm pull-right" data-ng-click="addNewPlace()">Potvrdi</button>
+                                                                <i class="fa fa-cog fa-spin fa-2x pull-right load_new_place.ng-hide" ng-show="loadNewPlace" style="margin-right:10px" ></i>
+                                                            </label>
+                                                        </section><!-- /Submit  -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form><!-- /Place Container-->
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-fax for_infobox" placehold="Fax" name="fax" model="clientdata.fax" directive="is-number"></smart-input>
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-phone for_infobox" placehold="Telefon" name="tel" model="clientdata.tel" directive="is-number"></smart-input>
+                                </div>
+
+                                <div class="row">
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-mobile for_infobox" placehold="Mobilni" name="mob"  model="clientdata.mob" directive="is-number"></smart-input>
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-envelope for_infobox" placehold="Email"  name="email" model="clientdata.email"></smart-input>
+                                </div>
+
+                                <div class="row">
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user-plus for_infobox" placehold="Pib" name="pib"  model="clientdata.pib" directive="is-number"></smart-input>
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user-plus for_infobox" placehold="Matični broj"  name="maticni_broj" model="clientdata.maticni_broj" directive="is-number"></smart-input>
+                                </div>
+
+                                <div class="row">
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-university for_infobox" placehold="Naziv Banke" name="bank_name"  model="clientdata.bank_name" directive="custom-validation"></smart-input>
+                                    <smart-input section-class="col col-sm-2 fixsection" label-class="input" icon="icon-prepend fa fa-university for_infobox" placehold="JIB"  name="jib" model="clientdata.bank_jib" directive="is-number"></smart-input>
+                                    <smart-input section-class="col col-sm-4 fixsection" label-class="input" icon="icon-prepend fa fa-university for_infobox" placehold="Broj računa"  name="bank_account" model="clientdata.bank_account" directive="is-number"></smart-input>
+                                </div>
+
+                                <div class="row">
+                                    <smart-input section-class="col col-sm-6 fixsection" label-class="input" icon="icon-prepend fa fa-user-plus for_infobox" placehold="Broj poljoprivrednog gazdinstva"  name="br_agricultural" model="clientdata.br_agricultural" ngclass="{'field-show': clientdata.client_type==='fizicko', 'field-hidden': clientdata.client_type==='pravno' || 'typeof clientdata.client_type===\'undefined\'', }"></smart-input>
+                                    <section class="col col-sm-6 fixsection">
+                                        <label class="input">
+                                            <button type="submit" class="btn btn-sm btn-primary pull-right" id="unos_korisnika" >Potvrdi</button>
+                                        </label>
+                                        <i class="fa fa-cog fa-2x fa-spin pull-right ajax_load_visibility"></i>
+                                    </section>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- USER TABLE -->
+    <article class="">
+        <div class="col-mg-12 form-header font-md font-white">
+            <i class="fa fa-table"></i><span> Lista svih kupaca/dobavljača</span>
+            <a href="client_api/printExcel"><i class="fa  fa-file-excel-o" style="color:#FFFFFF;float:right;font-size:19px"></i></a>
+        </div>
+        <div ng-controller="clientList as clientShowCase" style="position:relative">
+            <table datatable="" dt-options="clientShowCase.dtOptions" dt-columns="clientShowCase.dtColumns" dt-instance="clientShowCase.dtInstance"   class="table table-striped table-bordered tables_font" cellspacing="0" cellpadding="0"  width="100%" style="width:0px;font-family:arial">
+                <!--<p>
+                    <button type="button" data-ng-click="showCase.stateChange()">Hello</button>
+                </p>-->
+            </table>
+        </div>
+    </article>
+
+</div>
