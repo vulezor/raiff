@@ -146,6 +146,11 @@
     <script type="text/javascript" src="<?=URL.$value?>"></script>
 <?php endforeach;?>
 
+<!-- App Components JS Modules -->
+<?php foreach($this->component_module as $key => $value):?>
+    <script type="text/javascript" src="<?=URL.$value?>"></script>
+<?php endforeach;?>
+
 <!-- App Filters JS Modules -->
 <?php foreach($this->filters_module as $key => $value):?>
     <script type="text/javascript" src="<?=URL.$value?>"></script>

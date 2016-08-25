@@ -10,36 +10,12 @@
             Kupac/Pregled repromaterijala  </h1>
        </div>
         <div class="pull-right smart-form" style="position:relative;z-index:100">
-            <section class="col col-lg-12 padding_15" >
-                <label class="input" style="margin:0px;z-index:1001">
-                    <i class="icon-prepend for_infobox  fa fa-street-view" data-boxinfo="Datum do"></i>
-                    <input type="text" class="input-sm" name="Odabrani kupac" readonly placeholder="Izaberi kupca"  data-ng-model="odabrani_firm_name" data-ng-click="hide()">
-                </label>
-                <i class="fa fa-cog fa-spin for_kupca"></i>
-            </section>
-            <div class="col col-lg-9 search_kupac_con" data-ng-show="hideKupac" >
-                <div class="row" >
-                    <section class="col col-lg-12" style="margin:15px 0px">
-                        <label class="input">
-                            <i class="icon-prepend fa fa-search for_infobox" data-boxinfo="Datum do"></i>
-                            <input type="text" class="input-sm" name="filter_kupca" placeholder="filtriraj kupca"  data-ng-model="trazi_kupca">
-                        </label>
-                    </section>
-                    <div class="kupac_list" >
-                    <ul>
-                        <li data-ng-repeat="(key, kupac) in kupci | filter:trazi_kupca" data-ng-click="odabirKupca(kupac)">
-                            {{kupac.firm_name}}
-                        </li>
-                    </ul>
-                    </div>
-                </div>
-
-            </div>
+            <autocomplete-clients klijenti="kupci" callback="odabirkupca"></autocomplete-clients>
         </div>
     </article>
     <article style="position:relative;z-index:3">
         <ul class="category_menu cf">
-            <li data-ng-hide="odabrani_firm_name==''" data-ng-click="showGoods()"><span>{{odabrani_firm_name}}:</span> </li>
+            <li data-ng-hide="odabrani_firm_name==''" data-ng-click="showGoods()"><span>{{odabrani_firm_name}}:</span></li>
             <li data-ng-repeat="items in category_menu_items"  >
                 <span data-ng-click="showGoods($index)">&nbsp;{{ items.goods_type | capitalize }}  /&nbsp;</span>
                 <ul class="good_menu cf">

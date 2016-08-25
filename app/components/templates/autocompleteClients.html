@@ -1,0 +1,25 @@
+<section class="col col-lg-12 padding_15" >
+
+    <label class="input" style="margin:0px;z-index:1001">
+        <i class="icon-prepend for_infobox  fa fa-street-view" data-boxinfo="Naziv Klijenta"></i>
+        <input type="text" class="input-sm" name="Odabrani kupac" readonly placeholder="Izaberi kupca"  data-ng-model="odabrani_firm_name" data-ng-click="unhide()">
+    </label>
+    <i class="fa fa-cog fa-spin for_kupca"></i>
+</section>
+<div class="col col-lg-9 search_kupac_con" data-ng-show="hide_kupac" >
+    <div class="row" >
+        <section class="col col-lg-12" style="margin:15px 0px">
+            <label class="input">
+                <i class="icon-prepend fa fa-search for_infobox" data-boxinfo="Datum do"></i>
+                <input type="text" class="input-sm" name="filter_kupca" placeholder="filtriraj kupca"  data-ng-model="trazi_kupca">
+            </label>
+        </section>
+        <div class="kupac_list" >
+        <ul>
+            <li data-ng-repeat="(index, kupac) in klijenti | filter:trazi_kupca" data-ng-click="odabirKupca($index)">
+                {{kupac.firm_name}} {{$index}}
+            </li>
+        </ul>
+        </div>
+    </div>
+</div>

@@ -95,6 +95,11 @@ class Administrator extends Controller{
             'app/controllers/kupacRepromaterijalController.js',
         );
 
+        //filters Module
+        $this->view->component_module = array(
+            'app/components/autocompleteClients.js'
+        );
+
         //Directives Module
         $this->view->directives_module = array(
             'app/directives/winresize.js',

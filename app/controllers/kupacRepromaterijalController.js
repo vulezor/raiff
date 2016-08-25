@@ -1,8 +1,8 @@
 (function(){
     var kupacRepromaterijalController = function($scope, kupacRepromaterijalFactory, mainService){
-        $scope.hideKupac = false;
+        //$scope.hideKupac = false;
         $scope.kupci = []; //kupci objekt
-        $scope.trazi_kupca = ''; //filter varijabla
+        //$scope.trazi_kupca = ''; //filter varijabla
 
         $scope.odabrani_kupac = ''; //odabrani kupac varijabla
         $scope.odabrani_firm_name = '';
@@ -18,14 +18,7 @@
         /**
          * sakriva panel kupaca
          */
-        $scope.hide = function(){
-            $scope.hideKupac = !$scope.hideKupac;
-            $scope.trazi_kupca = '';
-            window.setTimeout(function(){
-                $('input[name="filter_kupca"]').focus();
-            }, 200);
-        };
-
+        
         //--------------------------------------------------------------------------------------------------------------------
         /**
          * poziva sve kupce koji su zavedeni i grupisani u otpremi repromaterijala
@@ -48,10 +41,10 @@
          * set $scope.odabrani_kupac
          * set $scope.category_menu_items
          */
-        $scope.odabirKupca = function(kupac){
+        $scope.odabirkupca = function(index){
             $('.for_kupca').css( "visibility", "visible");
-            $scope.odabrani_kupac = kupac.client_id;
-            $scope.odabrani_firm_name = kupac.firm_name;
+            $scope.odabrani_kupac = $scope.kupci[index].client_id;
+            $scope.odabrani_firm_name = $scope.kupci[index].firm_name;
             kupacRepromaterijalFactory.odabirKupca({client_id:$scope.odabrani_kupac}).success(function(msg){
                 if(msg.logedIn !== 0 && msg.hasOwnProperty('logedIn')===false) {
                     console.log(msg);
